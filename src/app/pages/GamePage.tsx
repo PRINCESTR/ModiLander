@@ -98,6 +98,7 @@ export const GamePage: React.FC = () => {
   const [maze, setMaze] = useState<number[][]>(freshMaze);
   const [playerUI, setPlayerUI] = useState({ x: 6, y: 10 });
   const [ghostsUI, setGhostsUI] = useState(() => makeGhosts(ghostCount));
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   const playerRef = useRef({ x: 6, y: 10, nextDir: null as string | null, currentDir: null as string | null });
   const mazeRef = useRef<number[][]>(freshMaze());
@@ -337,6 +338,7 @@ export const GamePage: React.FC = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      setHasInteracted(true);
       const dirs: any = { ArrowUp: 'UP', ArrowDown: 'DOWN', ArrowLeft: 'LEFT', ArrowRight: 'RIGHT', w: 'UP', s: 'DOWN', a: 'LEFT', d: 'RIGHT' };
       if (dirs[e.key]) handleDirection(dirs[e.key]);
     };
@@ -371,10 +373,10 @@ export const GamePage: React.FC = () => {
   const charDotColor = characterId === 'modi' ? 'rgba(251,146,60,0.7)' : 'rgba(96,165,250,0.7)';
   const charDotGlow = characterId === 'modi' ? 'rgba(249,115,22,0.5)' : 'rgba(59,130,246,0.5)';
 
-  // Swipe Gestures for Mobile
   const touchStartRef = useRef<{ x: number, y: number } | null>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    setHasInteracted(true);
     touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   };
 
@@ -610,6 +612,19 @@ export const GamePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Swipe Hint Overlay */}
+      {!hasInteracted && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-50 md:hidden bg-black/60 backdrop-blur-sm transition-opacity duration-500 rounded-lg">
+          <div className="flex flex-col items-center gap-3 animate-bounce">
+            <span className="text-4xl drop-shadow-xl" style={{ filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.6))' }}>👆</span>
+            <span className="text-white font-black tracking-widest text-xl uppercase text-center"
+              style={{ textShadow: `0 0 20px ${charAccent}` }}>
+              Swipe anywhere<br />to move
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* D-Pad Area - Only on touch devices (phone/tablet), hidden on desktop */}
       <div ref={dpadRef} className="md:hidden flex w-full items-center justify-center p-2 flex-shrink-0 z-50 bg-black/50 backdrop-blur-sm">

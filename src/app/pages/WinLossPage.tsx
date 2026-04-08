@@ -432,10 +432,10 @@ export const WinLossPage: React.FC = () => {
       <div className="relative z-10 flex flex-col lg:flex-row min-h-[100dvh] items-stretch">
 
         {/* ── LEFT / TOP: Video panel ── */}
-        <div className="relative w-full aspect-video lg:aspect-auto lg:w-[42%] lg:flex-shrink-0 lg:min-h-[100dvh] overflow-hidden bg-black">
+        <div className="relative w-full lg:w-[42%] aspect-video lg:aspect-auto lg:flex-shrink-0 lg:min-h-[100dvh] overflow-hidden bg-black flex items-center justify-center">
           <video src={videoSrc} autoPlay loop playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ opacity: 0.85 }} />
+            className="absolute inset-0 w-full h-full object-contain lg:object-cover"
+            style={{ opacity: 0.9 }} />
           {/* Overlay gradients */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80 lg:bg-gradient-to-r lg:from-black/20 lg:via-transparent lg:to-black/60" />
           {/* LIVE badge on video */}
