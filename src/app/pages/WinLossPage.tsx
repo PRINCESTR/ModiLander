@@ -56,9 +56,7 @@ export const WinLossPage: React.FC = () => {
     ? WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)]
     : LOSS_MESSAGES[Math.floor(Math.random() * LOSS_MESSAGES.length)];
 
-  const accentColor = isWin ? "#00e5ff" : "#ff3366";
-  const accentShadow = isWin ? "rgba(0,229,255,0.3)" : "rgba(255,51,102,0.3)";
-  const accentBg = isWin ? "rgba(0,229,255,0.08)" : "rgba(255,51,102,0.08)";
+  const accentColor = isWin ? "#0ea5e9" : "#f43f5e";
 
   const beep = useCallback((freq = 440, type: OscillatorType = "sine", vol = 0.08, dur = 0.1) => {
     try {
@@ -417,15 +415,12 @@ export const WinLossPage: React.FC = () => {
     <div className="font-sans select-none" style={{ minHeight: "100dvh", background: "#04040f", position: "relative", overflow: "hidden" }}>
 
       {/* Ambient glow */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute rounded-full blur-[120px]"
+      <div className="absolute inset-0 pointer-events-none overflow-hidden bg-background">
+        <div className="absolute rounded-full blur-[140px] opacity-40"
           style={{ top: "-10%", left: "50%", transform: "translateX(-50%)", width: "70%", height: "60%",
-            background: `radial-gradient(circle, ${accentColor}18 0%, transparent 70%)` }} />
-        <div className="absolute rounded-full blur-[100px]"
-          style={{ bottom: "-10%", right: "-5%", width: "40%", height: "40%",
-            background: "radial-gradient(circle, #e500ff10 0%, transparent 70%)" }} />
+            background: `radial-gradient(circle, ${accentColor}40 0%, transparent 70%)` }} />
         <div className="absolute inset-0"
-          style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+          style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
       </div>
 
       {/* ── Unified responsive layout ── */}
@@ -439,25 +434,24 @@ export const WinLossPage: React.FC = () => {
           {/* Overlay gradients */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80 lg:bg-gradient-to-r lg:from-black/20 lg:via-transparent lg:to-black/60" />
           {/* LIVE badge on video */}
-          <div className="absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-2.5 py-1"
-            style={{ background: "rgba(239,68,68,0.2)", border: "1px solid rgba(239,68,68,0.4)", backdropFilter: "blur(8px)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-            <span className="text-[7px] font-black tracking-[3px] text-red-400">LIVE</span>
+          <div className="absolute top-6 left-6 flex items-center gap-2 rounded-full px-3 py-1.5 glass-pill border-red-500/20">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse drop-shadow-md" />
+            <span className="text-[9px] font-bold tracking-widest text-red-500 uppercase">LIVE</span>
           </div>
           {/* Result label on video (mobile) */}
-          <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-2 lg:hidden px-4">
-            <div className="flex items-center justify-center gap-2.5">
+          <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-2 lg:hidden px-4">
+            <div className="flex items-center justify-center gap-3">
               {isWin
-                ? <IconTrophy size={28} color={accentColor} />
-                : <IconSkull size={28} color={accentColor} />}
-              <div className="text-3xl font-black tracking-tight" style={{
-                color: accentColor, textShadow: `0 0 30px ${accentShadow}`,
-                animation: isWin ? "pulse-glow 2s ease-in-out infinite" : "none",
+                ? <IconTrophy size={32} color={accentColor} />
+                : <IconSkull size={32} color={accentColor} />}
+              <div className="text-4xl font-extrabold tracking-tight" style={{
+                color: '#f3f4f6', textShadow: `0 4px 20px rgba(0,0,0,0.8), 0 0 40px ${accentColor}`,
+                animation: isWin ? "fade-in-up 0.8s ease-out" : "none",
               }}>
                 {winnerName} WINS!
               </div>
             </div>
-            <div className="text-xs font-bold tracking-[3px] uppercase" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <div className="text-[10px] font-bold tracking-widest uppercase mt-1" style={{ color: "rgba(255,255,255,0.7)", textShadow: "0 2px 4px rgba(0,0,0,0.6)" }}>
               {isWin ? "Mission Complete" : "Better luck next time"}
             </div>
           </div>
@@ -469,47 +463,41 @@ export const WinLossPage: React.FC = () => {
 
           {/* Desktop header */}
           <div className="hidden lg:flex flex-col gap-3">
-            <div className="flex items-center gap-2 rounded-full w-fit px-3.5 py-1.5"
-              style={{ background: accentBg, border: `1px solid ${accentColor}35` }}>
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: accentColor }} />
-              <span className="text-[10px] font-black tracking-[4px] uppercase" style={{ color: accentColor }}>
+            <div className="flex items-center gap-2 rounded-full w-fit px-3.5 py-1.5 glass-pill border" style={{ borderColor: `${accentColor}30` }}>
+              <span className="w-2 h-2 rounded-full animate-pulse drop-shadow-md" style={{ background: accentColor }} />
+              <span className="text-[10px] font-bold tracking-[4px] uppercase" style={{ color: accentColor }}>
                 {isWin ? "Mission Complete" : "Game Over"}
               </span>
             </div>
-            <h1 className="font-black tracking-tight leading-none flex items-center gap-4" style={{
+            <h1 className="font-extrabold tracking-tight leading-none flex items-center gap-4" style={{
               fontSize: "clamp(44px, 6vw, 80px)",
-              color: accentColor,
-              textShadow: `0 0 40px ${accentShadow}`,
+              color: '#f3f4f6',
+              textShadow: `0 4px 20px rgba(0,0,0,0.8), 0 0 40px ${accentColor}`,
             }}>
-              {isWin ? <IconTrophy size={48} color={accentColor} /> : <IconSkull size={48} color={accentColor} />}
+              {isWin ? <IconTrophy size={56} color={accentColor} /> : <IconSkull size={56} color={accentColor} />}
               {winnerName} WINS!
             </h1>
-            <p className="font-bold tracking-[3px] uppercase" style={{ fontSize: "16px", color: "rgba(255,255,255,0.45)" }}>
+            <p className="font-bold tracking-widest uppercase mt-1" style={{ fontSize: "16px", color: "rgba(255,255,255,0.6)", textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}>
               {isWin ? `${loserName} eliminated` : `Caught by ${winnerName}`}
             </p>
           </div>
 
           {/* Satirical message */}
-          <div className="flex items-start gap-2.5 rounded-xl px-4 py-3"
-            style={{ background: accentBg, border: `1px solid ${accentColor}25` }}>
-            <span className="text-base mt-0.5" style={{ color: accentColor }}>❝</span>
-            <p className="text-sm italic" style={{ color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{sarcasticMsg}</p>
-            <span className="text-base self-end" style={{ color: accentColor }}>❞</span>
+          <div className="flex items-start gap-3 rounded-2xl px-5 py-4 glass shadow-md"
+            style={{ borderLeft: `2px solid ${accentColor}` }}>
+            <span className="text-xl font-serif mt-0.5 leading-none" style={{ color: accentColor }}>❝</span>
+            <p className="text-sm italic tracking-wide" style={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>{sarcasticMsg}</p>
           </div>
 
           {/* Photo + Score row */}
           <div className="flex items-stretch gap-4">
             {/* Character photo */}
-            <div className="relative rounded-2xl overflow-hidden flex-shrink-0 flex items-center justify-center"
+            <div className="relative rounded-2xl overflow-hidden flex-shrink-0 flex items-center justify-center glass-panel"
               style={{
                 width: "clamp(90px, 20vw, 140px)", height: "clamp(90px, 20vw, 140px)",
-                background: "rgba(255,255,255,0.04)",
-                border: `1px solid ${accentColor}35`,
-                boxShadow: `0 20px 40px rgba(0,0,0,0.5)`,
               }}>
-              <img src={photoSrc} alt="Result" className="w-full h-full object-contain p-2 drop-shadow-2xl" />
-              <div className="absolute bottom-0 right-0 rounded-tl-xl p-2"
-                style={{ background: `${accentColor}20`, backdropFilter: "blur(8px)" }}>
+              <img src={photoSrc} alt="Result" className="w-full h-full object-contain p-2 drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]" />
+              <div className="absolute bottom-0 right-0 rounded-tl-xl p-2 glass">
                 {isWin
                   ? <IconTrophy size={18} color={accentColor} />
                   : <IconSkull size={18} color={accentColor} />}
@@ -517,31 +505,27 @@ export const WinLossPage: React.FC = () => {
             </div>
 
             {/* Score card */}
-            <div className="flex-1 flex flex-col justify-center rounded-2xl px-5 py-4"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", boxShadow: "0 20px 40px rgba(0,0,0,0.4)" }}>
-              {/* Top shimmer */}
-              <div className="absolute top-0 rounded-t-2xl h-px inset-x-0" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}40, transparent)` }} />
+            <div className="flex-1 flex flex-col justify-center rounded-2xl px-5 py-4 glass-panel">
               <div className="flex flex-col gap-1">
-                <span className="text-[8px] font-black tracking-[4px] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
+                <span className="text-[10px] font-bold tracking-widest uppercase text-white/50">
                   Promises Collected
                 </span>
-                <span className="font-black tabular-nums leading-none" style={{
+                <span className="font-extrabold tabular-nums leading-none tracking-tight" style={{
                   fontSize: "clamp(32px, 8vw, 64px)",
-                  color: "white",
-                  textShadow: `0 0 30px ${accentShadow}`,
+                  color: "#f3f4f6",
+                  textShadow: `0 4px 16px rgba(0,0,0,0.6)`,
                 }}>
                   {score.toString().padStart(6, "0")}
                 </span>
               </div>
-              <div className="flex items-center gap-3 mt-2 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+              <div className="flex items-center gap-4 mt-3 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
                 <div className="flex flex-col">
-                  <span className="text-[7px] tracking-[2px] uppercase" style={{ color: "rgba(255,255,255,0.2)" }}>Winner</span>
-                  <span className="text-xs font-black" style={{ color: "rgba(255,255,255,0.7)" }}>{winnerName}</span>
+                  <span className="text-[8px] tracking-widest uppercase text-white/40 mb-0.5">Winner</span>
+                  <span className="text-sm font-bold text-white/90">{winnerName}</span>
                 </div>
-                <div className="w-px h-6" style={{ background: "rgba(255,255,255,0.1)" }} />
                 <div className="flex flex-col">
-                  <span className="text-[7px] tracking-[2px] uppercase" style={{ color: "rgba(255,255,255,0.2)" }}>Eliminated</span>
-                  <span className="text-xs font-black" style={{ color: "rgba(255,255,255,0.45)" }}>{loserName}</span>
+                  <span className="text-[8px] tracking-widest uppercase text-white/40 mb-0.5">Eliminated</span>
+                  <span className="text-sm font-medium text-white/50">{loserName}</span>
                 </div>
               </div>
             </div>
@@ -555,23 +539,20 @@ export const WinLossPage: React.FC = () => {
             {/* Replay */}
             <button
               onClick={() => { beep(900, "square", 0.07, 0.12); navigate("/game", { state: { character } }); }}
-              className="relative overflow-hidden rounded-2xl font-black text-sm tracking-[3px] uppercase transition-all duration-300 active:scale-[0.97] group flex items-center justify-center gap-2"
-              style={{ padding: "16px 20px", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}
-              onMouseOver={e => (e.currentTarget.style.boxShadow = `0 0 30px ${accentShadow}`)}
-              onMouseOut={e => (e.currentTarget.style.boxShadow = "none")}
+              className="relative overflow-hidden rounded-2xl font-bold text-xs tracking-widest uppercase transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2.5 glass hover:bg-white/10"
+              style={{ padding: "18px 20px" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              <IconRefresh size={14} color="currentColor" />
+              <IconRefresh size={16} color="currentColor" />
               <span>REPLAY</span>
             </button>
 
             {/* Home */}
             <Link to="/"
-              className="relative overflow-hidden rounded-2xl font-black text-sm tracking-[3px] uppercase transition-all duration-300 active:scale-[0.97] flex items-center justify-center gap-2"
-              style={{ padding: "16px 20px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", textDecoration: "none", color: "rgba(255,255,255,0.7)" }}
+              className="relative overflow-hidden rounded-2xl font-bold text-xs tracking-widest uppercase transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2.5 glass hover:bg-white/10"
+              style={{ padding: "18px 20px", textDecoration: "none", color: "rgba(255,255,255,0.9)" }}
               onClick={() => beep(600, "sine", 0.05, 0.1)}
             >
-              <IconHome size={14} color="currentColor" />
+              <IconHome size={16} color="currentColor" />
               <span>HOME</span>
             </Link>
 
@@ -579,23 +560,21 @@ export const WinLossPage: React.FC = () => {
             <button
               onClick={() => { beep(700, "sine", 0.06, 0.1); handleScreenshotAndShare(); }}
               disabled={isSharing}
-              className="col-span-2 relative overflow-hidden rounded-2xl font-black text-sm tracking-[3px] uppercase transition-all duration-300 active:scale-[0.97] group flex items-center justify-center gap-2"
+              className="col-span-2 relative overflow-hidden rounded-2xl font-bold text-[13px] tracking-widest uppercase transition-all duration-300 active:scale-[0.98] group flex items-center justify-center gap-2.5 shadow-lg hover:shadow-2xl"
               style={{
-                padding: "16px 20px",
+                padding: "18px 20px",
                 background: isWin
-                  ? "linear-gradient(135deg, rgba(0,229,255,0.2), rgba(229,0,255,0.15))"
-                  : "linear-gradient(135deg, rgba(255,51,102,0.2), rgba(229,0,255,0.15))",
-                border: `1px solid ${accentColor}40`,
-                color: "white",
+                  ? "linear-gradient(135deg, rgba(14,165,233,0.8), rgba(14,165,233,0.4))"
+                  : "linear-gradient(135deg, rgba(244,63,94,0.8), rgba(244,63,94,0.4))",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#fff",
                 opacity: isSharing ? 0.7 : 1,
               }}
-              onMouseOver={e => !isSharing && (e.currentTarget.style.boxShadow = `0 0 40px ${accentShadow}`)}
-              onMouseOut={e => (e.currentTarget.style.boxShadow = "none")}
             >
-              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accentColor}70, transparent)` }} />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              <IconShare size={14} color="white" />
-              <span>{isSharing ? "CAPTURING..." : "SHARE SCORE"}</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <IconShare size={16} color="white" />
+              <span className="drop-shadow-md">{isSharing ? "CAPTURING..." : "SHARE SCORE"}</span>
             </button>
 
             {/* Instagram Story button */}

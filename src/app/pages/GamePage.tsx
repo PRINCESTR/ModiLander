@@ -366,12 +366,12 @@ export const GamePage: React.FC = () => {
   }, [isMuted]);
 
   // Character-specific theming for the game board
-  const charAccent = characterId === 'modi' ? '#f97316' : '#3b82f6';
-  const charAccentGlow = characterId === 'modi' ? 'rgba(249,115,22,0.6)' : 'rgba(59,130,246,0.6)';
-  const charWallColor = characterId === 'modi' ? 'rgba(249,115,22,0.06)' : 'rgba(59,130,246,0.06)';
-  const charWallBorder = characterId === 'modi' ? 'rgba(249,115,22,0.15)' : 'rgba(59,130,246,0.18)';
-  const charDotColor = characterId === 'modi' ? 'rgba(251,146,60,0.7)' : 'rgba(96,165,250,0.7)';
-  const charDotGlow = characterId === 'modi' ? 'rgba(249,115,22,0.5)' : 'rgba(59,130,246,0.5)';
+  const charAccent = characterId === 'modi' ? '#f59e0b' : '#0ea5e9';
+  const charAccentGlow = characterId === 'modi' ? 'rgba(245,158,11,0.6)' : 'rgba(14,165,233,0.6)';
+  const charWallColor = characterId === 'modi' ? 'rgba(245,158,11,0.04)' : 'rgba(14,165,233,0.04)';
+  const charWallBorder = characterId === 'modi' ? 'rgba(245,158,11,0.1)' : 'rgba(14,165,233,0.12)';
+  const charDotColor = characterId === 'modi' ? 'rgba(251,191,36,0.9)' : 'rgba(56,189,248,0.9)';
+  const charDotGlow = characterId === 'modi' ? 'rgba(245,158,11,0.3)' : 'rgba(14,165,233,0.3)';
 
   const touchStartRef = useRef<{ x: number, y: number } | null>(null);
 
@@ -415,61 +415,55 @@ export const GamePage: React.FC = () => {
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
       </div>
 
-      {/* Header */}
-      <div ref={headerRef} className="relative flex items-center justify-between px-5 py-3 flex-shrink-0 z-50">
-        {/* Subtle bottom line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-        <Link to="/" className="flex items-center gap-2 text-white/50 hover:text-primary transition-all duration-200 font-bold tracking-widest text-xs group">
-          <FaCaretLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
-          <span>MENU</span>
-        </Link>
-        {/* Center brand tag */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5">
-          <div className="w-1 h-1 rounded-full bg-primary/60 animate-pulse" />
-          <span className="text-[8px] font-black tracking-[5px] text-white/25 uppercase">MODI_LANDER</span>
-          <div className="w-1 h-1 rounded-full bg-primary/60 animate-pulse" />
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggleFullscreen}
-            className="md:hidden w-8 h-8 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center text-white/50 hover:text-primary hover:border-primary/30 transition-all"
-            aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-          >
-            {isFullscreen ? <LuMinimize size={16} /> : <LuMaximize size={16} />}
-          </button>
-          <button
-            onClick={() => setIsMuted(!isMuted)}
-            className="w-8 h-8 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center text-white/50 hover:text-primary hover:border-primary/30 transition-all"
-          >
-            {isMuted ? <LuVolumeX size={16} /> : <LuVolume2 size={16} />}
-          </button>
+      {/* Header Pill */}
+      <div ref={headerRef} className="relative flex justify-center w-full px-4 pt-4 pb-2 z-[60]">
+        <div className="flex items-center justify-between w-full max-w-[800px] rounded-full px-5 py-2 glass-pill shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          <Link to="/" className="flex items-center gap-1.5 text-white/50 hover:text-white/90 transition-all duration-200 font-bold tracking-widest text-xs group">
+            <FaCaretLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
+            <span>MENU</span>
+          </Link>
+          {/* Center brand tag */}
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: charAccent }} />
+            <span className="text-[10px] font-black tracking-[4px] text-white/80 uppercase">MODI_LANDER</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleFullscreen}
+              className="md:hidden text-white/50 hover:text-white transition-all transform active:scale-90"
+              aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            >
+              {isFullscreen ? <LuMinimize size={16} /> : <LuMaximize size={16} />}
+            </button>
+            <button
+              onClick={() => setIsMuted(!isMuted)}
+              className="text-white/50 hover:text-white transition-all transform active:scale-90"
+            >
+              {isMuted ? <LuVolumeX size={16} /> : <LuVolume2 size={16} />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Score Area */}
-      <div ref={scoreRef2} className="flex flex-col items-center flex-shrink-0 px-4 py-2.5 z-50">
-        <div className="relative flex w-full max-w-[800px] items-center justify-between rounded-2xl px-5 py-3 overflow-hidden"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)', boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.01)' }}
-        >
-          {/* Top shimmer line */}
-          <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-
+      {/* Score Area Pill */}
+      <div ref={scoreRef2} className="flex justify-center flex-shrink-0 px-4 w-full mb-3 z-[60]">
+        <div className="flex w-full max-w-[800px] items-center justify-between rounded-[24px] px-6 py-2 glass-pill shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
           {/* Promises Collected = Score */}
-          <div className="flex flex-col items-center gap-0.5">
-            <span className="text-[7px] font-black tracking-[3px] text-white/30 uppercase">Promises</span>
-            <span className="text-lg font-black tracking-widest tabular-nums" style={{ color: '#00e5ff', textShadow: '0 0 20px rgba(0,229,255,0.6)' }}>
+          <div className="flex flex-col items-start gap-0.5">
+            <span className="text-[9px] font-bold tracking-widest text-white/50 uppercase">Promises</span>
+            <span className="text-[22px] font-black tracking-wider tabular-nums leading-none" style={{ color: charAccent, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
               {score.toString().padStart(6, '0')}
             </span>
           </div>
 
           {/* Political Lives */}
           <div className="flex flex-col items-center gap-1">
-            <span className="text-[7px] font-black tracking-[3px] text-white/25 uppercase">Terms Left</span>
-            <div className="flex gap-2 rounded-full px-3 py-1.5" style={{ background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <span className="text-[9px] font-bold tracking-widest text-white/50 uppercase">Terms Left</span>
+            <div className="flex gap-2.5 rounded-full px-3.5 py-1.5" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.06)' }}>
               {[...Array(3)].map((_, i) => (
                 <span key={i}
-                  className="text-lg leading-none transition-all duration-300"
-                  style={{ opacity: i < lives ? 1 : 0.18, filter: i < lives ? 'none' : 'grayscale(1)' }}>
+                  className="text-[16px] leading-none transition-all duration-300 drop-shadow-md"
+                  style={{ opacity: i < lives ? 1 : 0.2, filter: i < lives ? 'none' : 'grayscale(1)', transform: i < lives ? 'scale(1)' : 'scale(0.8)' }}>
                   {characterId === 'modi' ? '🪷' : '✋'}
                 </span>
               ))}
@@ -477,9 +471,9 @@ export const GamePage: React.FC = () => {
           </div>
 
           {/* Hi-Score = Best */}
-          <div className="flex flex-col items-center gap-0.5">
-            <span className="text-[7px] font-black tracking-[3px] text-white/30 uppercase">Best</span>
-            <span className="text-lg font-black tracking-widest tabular-nums text-white/50">
+          <div className="flex flex-col items-end gap-0.5">
+            <span className="text-[9px] font-bold tracking-widest text-white/50 uppercase">Best</span>
+            <span className="text-[22px] font-black tracking-wider tabular-nums leading-none" style={{ color: "rgba(255,255,255,0.9)", textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
               {highScore.toString().padStart(6, '0')}
             </span>
           </div>

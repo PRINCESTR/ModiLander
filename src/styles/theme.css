@@ -26,23 +26,23 @@
 
 :root {
   --font-size: 16px;
-  --background: #04040f;      /* Deep space black */
-  --foreground: #ffffff;
-  --card: #08081a;
-  --card-foreground: #ffffff;
-  --popover: #08081a;
-  --popover-foreground: #ffffff;
-  --primary: #00e5ff;         /* Neon cyan */
-  --primary-foreground: #000000;
-  --secondary: #1e1e30;
-  --secondary-foreground: #ffffff;
-  --muted: #131325;
-  --muted-foreground: #8888aa;
-  --accent: #e500ff;          /* Vivid magenta */
-  --accent-foreground: #ffffff;
-  --destructive: #ff3366;
+  --background: #0A0A0A;      /* Premium matte black/charcoal */
+  --foreground: #f3f4f6;      /* Off-white soft text */
+  --card: #111111;
+  --card-foreground: #f3f4f6;
+  --popover: #111111;
+  --popover-foreground: #f3f4f6;
+  --primary: #f3f4f6;
+  --primary-foreground: #0A0A0A;
+  --secondary: #1C1C1E;       /* Sleek dark gray */
+  --secondary-foreground: #f3f4f6;
+  --muted: #1A1A1A;
+  --muted-foreground: #9ca3af;
+  --accent: #262626;
+  --accent-foreground: #f3f4f6;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #1e1e38;
+  --border: #262626;
   --input: transparent;
   --ring: oklch(0.708 0 0);
   --radius: 0.8rem;
@@ -68,34 +68,29 @@
   }
 
   h1, h2, h3, h4 {
-    font-weight: 900;
+    font-weight: 800; /* slightly softer than 900 for a more refined look */
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   button {
     font-size: var(--text-base);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.5;
     cursor: pointer;
-  }
-
-  input {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.5;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 }
 
 /* ─── Keyframes ─── */
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  from { opacity: 0; transform: translateY(20px) scale(0.99); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
@@ -106,32 +101,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
-}
-
-@keyframes line-draw {
-  from { stroke-dashoffset: 1000; opacity: 0; }
-  to   { stroke-dashoffset: 0;    opacity: 1; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 15px 4px rgba(0,229,255,0.25), 0 0 30px 8px rgba(0,229,255,0.1);
-  }
-  50% {
-    box-shadow: 0 0 30px 10px rgba(0,229,255,0.45), 0 0 60px 20px rgba(0,229,255,0.2);
-  }
-}
-
-@keyframes pellet-glow {
-  0%, 100% {
-    box-shadow: 0 0 15px 5px rgba(0,229,255,0.4), 0 0 30px 10px rgba(0,229,255,0.2);
-    opacity: 1;
-  }
-  50% {
-    box-shadow: 0 0 25px 12px rgba(0,229,255,0.8), 0 0 45px 20px rgba(0,229,255,0.4);
-    opacity: 0.85;
-  }
+  50%       { transform: translateY(-5px); }
 }
 
 @keyframes spin-slow {
@@ -139,21 +109,34 @@
   to   { transform: rotate(360deg); }
 }
 
-/* ─── Utility helpers ─── */
+/* ─── Premium Glassmorphism ─── */
 .glass {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-pill {
+  background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(0,229,255,0.3);
-}
-
-.glow-accent {
-  box-shadow: 0 0 20px rgba(229,0,255,0.3);
-}
-
-.text-glow-cyan {
-  text-shadow: 0 0 20px rgba(0,229,255,0.6);
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

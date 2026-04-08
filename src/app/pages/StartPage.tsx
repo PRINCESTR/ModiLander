@@ -46,8 +46,8 @@ const CHARACTERS = [
     images: [modi5, modi6, modi7],
     heroImage: modi6,
     audio: modiMusic,
-    accent: "#f97316", accentLight: "#fb923c",
-    border: "rgba(249,115,22,0.45)", shadow: "rgba(249,115,22,0.3)", bg: "rgba(249,115,22,0.10)",
+    accent: "#f59e0b", accentLight: "#fbbf24", /* Premium warm amber/gold */
+    border: "rgba(245,158,11,0.2)", shadow: "rgba(245,158,11,0.15)", bg: "rgba(245,158,11,0.08)",
     stats: [
       { l: "Promise Speed",   v: 99 },
       { l: "Dot Collection",  v: 95 },
@@ -63,8 +63,8 @@ const CHARACTERS = [
     images: [rahul1, rahul2, rahul3],
     heroImage: rahul1,
     audio: rahulMusic,
-    accent: "#3b82f6", accentLight: "#60a5fa",
-    border: "rgba(59,130,246,0.45)", shadow: "rgba(59,130,246,0.3)", bg: "rgba(59,130,246,0.10)",
+    accent: "#0ea5e9", accentLight: "#38bdf8", /* Premium cool sky blue */
+    border: "rgba(14,165,233,0.2)", shadow: "rgba(14,165,233,0.15)", bg: "rgba(14,165,233,0.08)",
     stats: [
       { l: "Yatra Distance",  v: 88 },
       { l: "Mic Drops",       v: 72 },
@@ -231,30 +231,30 @@ export const StartPage: React.FC = () => {
       </div>
 
       {/* ── Header ── */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 pt-3 pb-2"
-        style={{ background: "rgba(4,4,15,0.7)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="flex items-center gap-2.5">
-          <div className="relative w-5 h-5">
-            <div className="absolute inset-0 rounded-full blur-md animate-pulse" style={{ background: sel.accent + "50" }} />
-            <img src={Logo} alt="" className="relative w-5 h-5 object-contain" />
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 pt-4 pb-3"
+        style={{ background: "linear-gradient(to bottom, rgba(10,10,10,0.9), rgba(10,10,10,0.6))", backdropFilter: "blur(24px)", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
+        <div className="flex items-center gap-3">
+          <div className="relative w-6 h-6">
+            <div className="absolute inset-0 rounded-full bg-white/5" />
+            <img src={Logo} alt="" className="relative w-6 h-6 object-contain drop-shadow-md" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-xs font-black tracking-[3px] text-white uppercase">Modi_Lander</span>
-            <span className="text-[8px] tracking-[2px] font-medium" style={{ color: "rgba(255,255,255,0.35)" }}>by Prince &amp; Smit</span>
+            <span className="text-xs font-black tracking-[4px] text-white/90 uppercase">Modi_Lander</span>
+            <span className="text-[8px] tracking-[2px] font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>by Prince &amp; Smit</span>
           </div>
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           <button onClick={() => { beep(); setIsMuted(m => !m); }}
-            className="w-7 h-7 rounded-lg flex items-center justify-center transition-all"
-            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all glass hover:bg-white/10"
+          >
             {isMuted
-              ? <IconMute size={13} color="rgba(255,255,255,0.4)" />
-              : <IconVolume size={13} color="rgba(255,255,255,0.4)" />}
+              ? <IconMute size={14} color="rgba(255,255,255,0.6)" />
+              : <IconVolume size={14} color="rgba(255,255,255,0.6)" />}
           </button>
           <button onClick={() => { beep(); handleShare(); }}
-            className="w-7 h-7 rounded-lg flex items-center justify-center transition-all"
-            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            <IconShare size={13} color="rgba(255,255,255,0.4)" />
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-all glass hover:bg-white/10"
+          >
+            <IconShare size={14} color="rgba(255,255,255,0.6)" />
           </button>
         </div>
       </header>
@@ -269,33 +269,33 @@ export const StartPage: React.FC = () => {
           {/* Character image — large and cinematic */}
           <div className="relative flex items-end justify-center w-full h-full" style={{ minHeight: "clamp(280px, 50vw, 620px)" }}>
             {/* Glow behind character */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-3/4 rounded-full blur-3xl transition-all duration-1000"
-              style={{ background: `radial-gradient(circle, ${sel.accent}30 0%, transparent 70%)` }} />
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-3/4 h-3/4 rounded-full blur-[100px] transition-all duration-1000 opacity-60"
+              style={{ background: `radial-gradient(circle, ${sel.accent}40 0%, transparent 60%)` }} />
             {/* Character img — cycles through personality images */}
             <img
               key={selId + heroImgIdx}
               src={sel.images[heroImgIdx]}
               alt={sel.name}
-              className="relative z-10 object-contain drop-shadow-2xl transition-all duration-700"
+              className="relative z-10 object-contain transition-all duration-700"
               style={{
                 height: "clamp(220px, 42vw, 540px)",
-                filter: `drop-shadow(0 0 40px ${sel.accent}60)`,
+                filter: `drop-shadow(0 20px 40px rgba(0,0,0,0.5)) drop-shadow(0 0 40px ${sel.accent}30)`,
                 animation: "fade-in 0.5s ease-out",
               }}
             />
             {/* Character name overlay at bottom */}
-            <div className="absolute bottom-0 left-0 right-0 px-6 pb-4 z-20"
-              style={{ background: "linear-gradient(to top, rgba(4,4,15,0.9) 0%, transparent 100%)" }}>
+            <div className="absolute bottom-0 left-0 right-0 px-8 pb-6 z-20"
+              style={{ background: "linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.8) 40%, transparent 100%)" }}>
               <div className="flex items-end justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: sel.accent }} />
-                    <span className="text-[8px] font-black tracking-[4px] uppercase" style={{ color: sel.accent }}>Playing as</span>
+                  <div className="flex items-center gap-2 mb-1.5 opacity-80">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: sel.accent }} />
+                    <span className="text-[8px] font-black tracking-[4px] uppercase text-white/50">Playing as</span>
                   </div>
-                  <h2 className="font-black leading-none" style={{
-                    fontSize: "clamp(28px, 8vw, 48px)",
+                  <h2 className="font-black leading-none tracking-tight" style={{
+                    fontSize: "clamp(32px, 8vw, 54px)",
                     color: "#ffffff",
-                    textShadow: `0 2px 10px rgba(255,255,255,0.2), 0 0 20px ${sel.accent}50`,
+                    textShadow: `0 4px 20px rgba(0,0,0,0.6)`,
                   }}>{sel.name}</h2>
                   <p className="text-xs font-medium mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{sel.title}</p>
                 </div>
@@ -316,17 +316,15 @@ export const StartPage: React.FC = () => {
 
           {/* Title block */}
           <div className="flex flex-col gap-0.5">
-            <div className="font-black leading-none select-none" style={{
+            <div className="font-extrabold leading-none select-none tracking-tight" style={{
               fontSize: "clamp(52px, 12vw, 88px)",
-              letterSpacing: "-0.04em",
-              color: "#ffffff",
-              textShadow: "0 2px 20px rgba(255,255,255,0.15)",
+              color: "#f3f4f6",
+              textShadow: "0 4px 20px rgba(0,0,0,0.5)",
             }}>MODI</div>
-            <div className="font-black leading-none select-none transition-colors duration-500" style={{
+            <div className="font-extrabold leading-none select-none tracking-tight transition-colors duration-500" style={{
               fontSize: "clamp(52px, 12vw, 88px)",
-              letterSpacing: "-0.04em",
               color: sel.accent,
-              textShadow: `0 0 30px ${sel.accent}70, 0 0 60px ${sel.accent}30`,
+              textShadow: "0 4px 20px rgba(0,0,0,0.6)",
             }}>LANDER</div>
             <p className="text-sm font-semibold tracking-[3px] uppercase mt-2" style={{ color: "rgba(255,255,255,0.3)" }}>
               India's Most Satirical Maze Game
@@ -341,27 +339,25 @@ export const StartPage: React.FC = () => {
                 const isSel = selId === char.id;
                 return (
                   <button key={char.id} onClick={() => handleSelect(char.id)}
-                    className="relative flex flex-col items-center gap-2 p-3.5 rounded-2xl overflow-hidden group text-center transition-all duration-300"
+                    className={`relative flex flex-col items-center gap-2 p-3.5 rounded-2xl overflow-hidden group text-center transition-all duration-300 ${isSel ? 'glass-panel' : 'glass hover:bg-white/5'}`}
                     style={{
-                      background: isSel ? `linear-gradient(135deg, ${char.accent}20, ${char.accentLight}08)` : "rgba(255,255,255,0.03)",
-                      border: `1px solid ${isSel ? char.border : "rgba(255,255,255,0.07)"}`,
-                      boxShadow: isSel ? `0 0 30px ${char.shadow}` : "none",
                       transform: isSel ? "scale(1.02)" : "scale(1)",
+                      opacity: isSel ? 1 : 0.6,
                     }}>
                     {isSel && <div className="absolute top-0 left-4 right-4 h-px"
                       style={{ background: `linear-gradient(90deg, transparent, ${char.accent}80, transparent)` }} />}
 
                     {/* Thumbnail */}
-                    <div className="w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300"
-                      style={{ background: isSel ? char.bg : "rgba(255,255,255,0.04)", border: `1px solid ${isSel ? char.border : "rgba(255,255,255,0.06)"}` }}>
-                      <img src={char.images[0]} alt={char.name} className="h-12 w-12 object-contain drop-shadow-xl" />
+                    <div className="w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 shadow-xl"
+                      style={{ background: isSel ? char.bg : "transparent", border: `1px solid ${isSel ? char.border : "transparent"}` }}>
+                      <img src={char.images[0]} alt={char.name} className="h-12 w-12 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.4)]" />
                     </div>
 
                     <div className="flex flex-col items-center gap-0.5">
-                      <span className="text-base font-black tracking-[1.5px]"
-                        style={{ color: isSel ? "#fff" : "rgba(255,255,255,0.4)" }}>{char.name}</span>
-                      <span className="text-[9px] font-bold uppercase tracking-wide"
-                        style={{ color: isSel ? char.accent + "cc" : "rgba(255,255,255,0.18)" }}>{char.title}</span>
+                      <span className="text-base font-bold tracking-wide"
+                        style={{ color: isSel ? "#f3f4f6" : "rgba(243,244,246,0.6)" }}>{char.name}</span>
+                      <span className="text-[9px] font-medium uppercase tracking-widest"
+                        style={{ color: isSel ? char.accent : "rgba(243,244,246,0.3)" }}>{char.title}</span>
                     </div>
 
                     {/* Stats — shown when selected */}
@@ -377,11 +373,11 @@ export const StartPage: React.FC = () => {
           </div>
 
           {/* Quote */}
-          <div className="rounded-xl px-4 py-3 flex items-start gap-2 transition-all duration-500"
-            style={{ background: sel.bg, border: `1px solid ${sel.border}45` }}>
-            <span className="text-base" style={{ color: sel.accent, lineHeight: 1 }}>&#8220;</span>
-            <p className="text-[9px] italic leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.35)" }}>{sel.quote}</p>
-            <span className="text-base self-end" style={{ color: sel.accent, lineHeight: 1 }}>&#8221;</span>
+          {/* Quote */}
+          <div className="rounded-2xl px-5 py-4 flex items-start gap-3 transition-all duration-500 glass shadow-md"
+            style={{ borderLeft: `2px solid ${sel.accent}` }}>
+            <span className="text-xl font-serif leading-none" style={{ color: sel.accent }}>&#8220;</span>
+            <p className="text-[10px] italic leading-relaxed flex-1 tracking-wide" style={{ color: "rgba(255,255,255,0.6)" }}>{sel.quote}</p>
           </div>
 
           {/* ── Difficulty selector ── */}
@@ -395,19 +391,15 @@ export const StartPage: React.FC = () => {
                 return (
                   <button key={d.id}
                     onClick={() => { beep(600, "sine", 0.04, 0.08); setDifficulty(d.id); }}
-                    className="relative flex flex-col items-center gap-1 py-3 rounded-xl transition-all duration-300"
+                    className={`relative flex flex-col items-center gap-1.5 py-3.5 rounded-2xl transition-all duration-300 ${isSel ? 'glass-panel shadow-lg' : 'glass hover:bg-white/5'}`}
                     style={{
-                      background: isSel ? `${d.color}18` : "rgba(255,255,255,0.03)",
-                      border: `1px solid ${isSel ? d.color + "55" : "rgba(255,255,255,0.07)"}`,
-                      transform: isSel ? "scale(1.04)" : "scale(1)",
-                      boxShadow: isSel ? `0 0 20px ${d.color}25` : "none",
+                      transform: isSel ? "scale(1.02)" : "scale(1)",
+                      border: isSel ? `1px solid ${d.color}40` : '',
                     }}>
-                    {isSel && <div className="absolute top-0 left-3 right-3 h-px"
-                      style={{ background: `linear-gradient(90deg, transparent, ${d.color}80, transparent)` }} />}
-                    <span className="text-[10px] font-black tracking-wide" style={{ color: isSel ? "#fff" : "rgba(255,255,255,0.35)" }}>
+                    <span className="text-[10px] font-bold tracking-widest" style={{ color: isSel ? d.color : "rgba(255,255,255,0.6)" }}>
                       {d.label}
                     </span>
-                    <span className="text-[7px] font-medium" style={{ color: isSel ? d.color : "rgba(255,255,255,0.2)" }}>
+                    <span className="text-[7px] font-medium opacity-60" style={{ color: isSel ? d.color : "rgba(255,255,255,0.3)" }}>
                       {d.subtitle}
                     </span>
                   </button>
@@ -418,44 +410,38 @@ export const StartPage: React.FC = () => {
 
           {/* ── Start button ── */}
           <button onClick={handleStart}
-            className="relative w-full overflow-hidden rounded-2xl group transition-all duration-300 active:scale-[0.97]"
-            style={{ padding: "18px 24px",
-              background: `linear-gradient(135deg, ${sel.accent}25, rgba(255,255,255,0.04), ${sel.accentLight}18)`,
-              border: `1px solid ${sel.border}`,
-            }}
-            onMouseOver={e => (e.currentTarget.style.boxShadow = `0 0 60px ${sel.shadow}, 0 0 120px ${sel.shadow}40`)}
-            onMouseOut={e => (e.currentTarget.style.boxShadow = "none")}>
-            <div className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: `linear-gradient(90deg, transparent, ${sel.accent}90, transparent)` }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full"
-              style={{ transition: "transform 0.7s ease-in-out" }} />
-            <div className="relative flex flex-col items-center gap-1">
-              <span className="text-[11px] font-black tracking-[8px] uppercase text-white">
+            className="relative w-full overflow-hidden rounded-2xl group transition-all duration-300 active:scale-[0.98] shadow-lg hover:shadow-2xl"
+            style={{ 
+              padding: "18px 24px",
+              background: `linear-gradient(135deg, ${sel.accent}E6, ${sel.accentLight}B3)`,
+              backdropFilter: "blur(20px)",
+              border: `1px solid pl-white/20`,
+            }}>
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative flex flex-col items-center gap-1.5">
+              <span className="text-xs font-bold tracking-[8px] uppercase text-white drop-shadow-md">
                 Start Election
               </span>
-              <span className="text-[7px] font-medium tracking-[3px]" style={{ color: "rgba(255,255,255,0.25)" }}>
+              <span className="text-[8px] font-medium tracking-[3px] text-white/70">
                 {diff.label} — {diff.subtitle}
               </span>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 h-px opacity-40"
-              style={{ background: `linear-gradient(90deg, transparent, ${sel.accentLight}70, transparent)` }} />
           </button>
 
           <p className="text-center text-[7px] tracking-[2px] uppercase" style={{ color: "rgba(255,255,255,0.12)" }}>
             Arrow Keys &middot; WASD &middot; D-Pad on mobile
           </p>
 
-          {/* ── Scoreboard ── */}
-          <div className="flex rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          <div className="flex rounded-2xl overflow-hidden glass">
             {[
               { label: "Best Score",    value: bestScore.toString().padStart(6, "0"), color: sel.accent },
               { label: "Promises Kept", value: "😭",  color: "#ef4444" },
-              { label: "Terms Left",    value: "∞",   color: "rgba(255,255,255,0.35)" },
+              { label: "Terms Left",    value: "∞",   color: "rgba(255,255,255,0.4)" },
             ].map((item, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-0.5 py-3"
-                style={{ background: "rgba(255,255,255,0.02)", borderRight: i < 2 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
-                <span className="text-[9px] uppercase tracking-[2px] font-bold" style={{ color: "rgba(255,255,255,0.3)" }}>{item.label}</span>
-                <span className="text-base font-black tabular-nums" style={{ color: item.color }}>{item.value}</span>
+              <div key={i} className="flex-1 flex flex-col items-center gap-1 py-4"
+                style={{ borderRight: i < 2 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
+                <span className="text-[9px] uppercase tracking-widest font-semibold" style={{ color: "rgba(255,255,255,0.4)" }}>{item.label}</span>
+                <span className="text-lg font-bold tabular-nums drop-shadow-md" style={{ color: item.color }}>{item.value}</span>
               </div>
             ))}
           </div>
@@ -468,28 +454,25 @@ export const StartPage: React.FC = () => {
               <span className="text-[7px] tracking-[4px] uppercase font-black" style={{ color: "rgba(255,255,255,0.15)" }}>Crafted by</span>
               <div className="h-px w-4" style={{ background: `linear-gradient(270deg, transparent, ${sel.accent}25)` }} />
             </div>
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-4">
               {CREATORS.map(c => (
-                <div key={c.name} className="flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5"
-                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <div className="w-0.5 h-6 rounded-full opacity-50"
+                <div key={c.name} className="flex items-center gap-3 rounded-2xl px-4 py-3 glass hover:bg-white/5 transition-all">
+                  <div className="w-1 h-6 rounded-full opacity-70"
                     style={{ background: `linear-gradient(180deg, ${c.color}, transparent)` }} />
-                  <div className="flex flex-col gap-0">
-                    <span className="text-[10px] font-black tracking-[2px]" style={{ color: "rgba(255,255,255,0.8)" }}>{c.name}</span>
-                    <span className="text-[7px] tracking-wider" style={{ color: "rgba(255,255,255,0.2)" }}>{c.handle}</span>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-xs font-bold tracking-[1px] text-white/90">{c.name}</span>
+                    <span className="text-[8px] tracking-wide text-white/40">{c.handle}</span>
                   </div>
-                  <div className="flex gap-1.5">
+                  <div className="flex gap-1.5 ml-2">
                     <a href={c.ig} target="_blank" rel="noopener noreferrer"
-                      className="w-6 h-6 rounded-md flex items-center justify-center transition-all"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", textDecoration: "none" }}
+                      className="w-7 h-7 rounded-full flex items-center justify-center transition-all bg-white/5 hover:bg-white/10"
                       title="Instagram">
-                      <IconInstagram size={12} color="rgba(255,255,255,0.5)" />
+                      <IconInstagram size={13} color="rgba(255,255,255,0.7)" />
                     </a>
                     <a href={c.gh} target="_blank" rel="noopener noreferrer"
-                      className="w-6 h-6 rounded-md flex items-center justify-center transition-all"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", textDecoration: "none" }}
+                      className="w-7 h-7 rounded-full flex items-center justify-center transition-all bg-white/5 hover:bg-white/10"
                       title="GitHub">
-                      <IconGitHub size={12} color="rgba(255,255,255,0.45)" />
+                      <IconGitHub size={13} color="rgba(255,255,255,0.7)" />
                     </a>
                   </div>
                 </div>
