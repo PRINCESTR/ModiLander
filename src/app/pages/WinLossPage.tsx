@@ -432,8 +432,7 @@ export const WinLossPage: React.FC = () => {
       <div className="relative z-10 flex flex-col lg:flex-row min-h-[100dvh] items-stretch">
 
         {/* ── LEFT / TOP: Video panel ── */}
-        <div className="relative lg:w-[42%] lg:flex-shrink-0 lg:min-h-screen overflow-hidden"
-          style={{ minHeight: "clamp(240px, 45vw, 100vh)" }}>
+        <div className="relative w-full aspect-video lg:aspect-auto lg:w-[42%] lg:flex-shrink-0 lg:min-h-[100dvh] overflow-hidden bg-black">
           <video src={videoSrc} autoPlay loop playsInline
             className="absolute inset-0 w-full h-full object-cover"
             style={{ opacity: 0.85 }} />

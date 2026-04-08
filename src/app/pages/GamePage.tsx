@@ -371,8 +371,41 @@ export const GamePage: React.FC = () => {
   const charDotColor = characterId === 'modi' ? 'rgba(251,146,60,0.7)' : 'rgba(96,165,250,0.7)';
   const charDotGlow = characterId === 'modi' ? 'rgba(249,115,22,0.5)' : 'rgba(59,130,246,0.5)';
 
+  // Swipe Gestures for Mobile
+  const touchStartRef = useRef<{ x: number, y: number } | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartRef.current) return;
+    const dx = e.touches[0].clientX - touchStartRef.current.x;
+    const dy = e.touches[0].clientY - touchStartRef.current.y;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+    
+    if (Math.max(absDx, absDy) > 35) { // 35px threshold
+      if (absDx > absDy) {
+        handleDirection(dx > 0 ? 'RIGHT' : 'LEFT');
+      } else {
+        handleDirection(dy > 0 ? 'DOWN' : 'UP');
+      }
+      touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }; // reset to prevent multiple fires
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchStartRef.current = null;
+  };
+
   return (
-    <div className="fixed inset-0 h-[100dvh] flex flex-col bg-background text-foreground font-sans overflow-hidden select-none">
+    <div 
+      onTouchStart={handleTouchStart} 
+      onTouchMove={handleTouchMove} 
+      onTouchEnd={handleTouchEnd} 
+      className="fixed inset-0 h-[100dvh] flex flex-col bg-background text-foreground font-sans overflow-hidden select-none"
+    >
       {/* Ambient background glow */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[30%] bg-primary/5 blur-[100px] rounded-full" />
