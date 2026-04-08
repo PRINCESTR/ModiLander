@@ -1,18 +1,15 @@
 import { createBrowserRouter } from "react-router";
 import { Layout } from "./Layout";
-import { StartPage } from "./pages/StartPage";
-import { GamePage } from "./pages/GamePage";
-import { WinLossPage } from "./pages/WinLossPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: Layout,
     children: [
-      { index: true, Component: StartPage },
-      { path: "game", Component: GamePage },
-      { path: "win-loss", Component: WinLossPage },
-      { path: "*", Component: StartPage }, // redirect unknowns to start
+      { index: true, async lazy() { const { StartPage } = await import("./pages/StartPage"); return { Component: StartPage }; } },
+      { path: "game", async lazy() { const { GamePage } = await import("./pages/GamePage"); return { Component: GamePage }; } },
+      { path: "win-loss", async lazy() { const { WinLossPage } = await import("./pages/WinLossPage"); return { Component: WinLossPage }; } },
+      { path: "*", async lazy() { const { StartPage } = await import("./pages/StartPage"); return { Component: StartPage }; } },
     ],
   },
 ]);
