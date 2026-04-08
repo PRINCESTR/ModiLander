@@ -2,50 +2,29 @@
 
 <img src="./public/favicon.png" alt="Modiman Logo" width="120" height="120" style="border-radius: 20px;" />
 
-# MODIMAN 
+# 🏛️ MODI_LANDER
 
-### Khela Hobe 🕹️
+> *"Poverty is just a state of mind... unlike this maze, which is very real."*
 
-*Eat dots. Dodge opponents. Score high. Just for fun.*
+**MODI_LANDER** is India's most satirical, highly-polished arcade maze game. Play as the nation's favorite Netas, navigate the complex corridors of democracy, collect endless "promises," and sprint away from the lethal ghosts of accountability. 
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-modiman--xi.vercel.app-FFFF00?style=for-the-badge&labelColor=000000)](https://modiman-xi.vercel.app/)
+Created by **Prince** & **Smit**.
 [![Built with Vite](https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![PWA Ready](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 
 ---
-
-### 📸 Preview
-
-| Desktop | Mobile |
-|:---:|:---:|
-| ![Web Preview](./public/web-preview.png) | ![Mobile Preview](./public/mob-preview.png) |
-
 </div>
-
----
-
-## 🎮 What is Modiman?
-
-**Modiman** is a Pac-Man inspired browser arcade game with an Indian political twist — built entirely for fun. Choose your character, navigate the maze, collect dots and power pellets, and outrun your opponents!
-
-> ⚠️ *This game is purely for entertainment. It is not affiliated with or related to any political party or public figure.*
-
----
 
 ## ✨ Features
 
-- 🟡 **Classic Pac-Man gameplay** — dots, power pellets, and chasing ghosts
-- 👤 **Two playable characters** — pick MODI or RAHUL, each with unique opponents
-- 🧠 **Smart ghost AI** — enemies hunt you down using pathfinding
-- 📱 **Fully responsive** — works on mobile, tablet, and desktop
-- ⛶ **Fullscreen mode** — tap the button or use your first D-Pad input on mobile to go fullscreen
-- 🎵 **Dynamic audio** — background music, character sound effects, win/loss clips
-- 🔇 **Mute toggle** — silence the game anytime
-- 📸 **Score sharing** — screenshot your final score and share it natively or via the share sheet
-- 💾 **High score persistence** — your best score is saved locally
-- 📲 **PWA** — install it on your phone like a native app
+- 🟡 **Pick Your Neta:** Play as **Modi Ji** (The Great Pellet Collector) or **Rahul G** (The Maze Philosopher).
+- 🧠 **Smart Opponents:** Ghost enemies that track your movements better than government policy tracks progress.
+- ⚡ **Power Mode:** Activate character-specific "Power Modes" to turn the tables on your opponents. Just like election season!
+- 📰 **Sarcastic Live Ticker:** Real-time breaking news updates mocking the absolute state of modern political discourse.
+- 🎨 **Flawless UI/UX:** Built with React, Tailwind CSS, and a completely custom glass-morphic luxury dark-mode design because even our satire needs to look premium.
+- 📸 **1-Click Instagram Sharability:** Brag about your high scores directly to your Instagram Story using native Deep Linking APIs. 
+- 📱 **Fully Responsive:** Works perfectly on mobile, tablet, and desktop with a custom gesture D-Pad for phones.
 
 ---
 
@@ -53,96 +32,41 @@
 
 | Input | Action |
 |-------|--------|
-| `Arrow Keys` / `W A S D` | Move player |
-| D-Pad (mobile) | Move player |
-| `⛶` button (mobile header) | Toggle fullscreen |
+| `Arrow Keys` / `W A S D` | Move leader |
+| D-Pad (mobile) | Swipe to move leader |
+| `⛶` button | Toggle fullscreen |
 | `🔇` button | Toggle mute |
 
 ---
 
-## 🚀 Tech Stack
-
-| Layer | Tech |
-|-------|------|
-| ⚡ Build Tool | [Vite 6](https://vitejs.dev/) |
-| ⚛️ UI | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) |
-| 🎨 Styling | [Tailwind CSS v4](https://tailwindcss.com/) |
-| 🗺️ Routing | [React Router v7](https://reactrouter.com/) |
-| 📷 Screenshot | [html2canvas](https://html2canvas.hertzen.com/) |
-| 📲 PWA | [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) |
-| 🎮 Icons | [React Icons](https://react-icons.github.io/react-icons/) |
-
----
-
-## 📦 Getting Started
+## 🚀 Run Locally
 
 ```bash
 # Clone the repo
-git clone https://github.com/itzpa1/modiman.git
-cd modiman
+git clone https://github.com/PRINCESTR/ModiLander.git
+cd modiman-main
 
 # Install dependencies
 npm install
 
-# Start dev server
+# Start the election
 npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### Build for production
-
-```bash
-npm run build
-npm run preview
-```
-
 ---
 
-## 📁 Project Structure
+## 📜 Disclaimer
 
-```
-modiman/
-├── public/               # Static assets (favicon, PWA icons, OG images)
-├── src/
-│   ├── app/
-│   │   ├── components/   # Button, DPad, ShareSheet
-│   │   ├── pages/        # StartPage, GamePage, WinLossPage
-│   │   ├── routes.tsx
-│   │   └── App.tsx
-│   ├── assets/
-│   │   ├── audio/        # Sound effects & background music
-│   │   ├── characters/   # Character image assets
-│   │   └── win/          # Win/loss videos & photos
-│   ├── styles/           # Tailwind CSS & theme tokens
-│   └── main.tsx
-├── index.html
-└── vite.config.ts
-```
-
----
-
-## 🌐 Deployment
-
-The project is deployed on **Vercel** and auto-deploys on every push to `main`.
-
-👉 **[https://modiman-xi.vercel.app/](https://modiman-xi.vercel.app/)**
-
-You can also deploy to [Netlify](https://netlify.com) or [GitHub Pages](https://pages.github.com/) with zero config.
-
----
-
-## 🙌 Credits
-
-- Inspired by the classic **Pac-Man** arcade game by Namco
-- Built with ❤️ by **[code.itzpa1](https://github.com/itzpa1)**
+This project is definitively, undeniably **satire**. All characterizations, quotes, and "live breaking news" tickers are fictional and intended purely for comedic and entertainment purposes. If you get offended, just hit the mute button. 🔇
 
 ---
 
 <div align="center">
 
-*If you liked the project, drop a ⭐ on the repo — it means a lot!*
+*If you liked the project, drop a ⭐ on the repo!*
 
-[![GitHub Stars](https://img.shields.io/github/stars/itzpa1/modiman?style=social)](https://github.com/itzpa1/modiman)
+[![GitHub Stars](https://img.shields.io/github/stars/PRINCESTR/ModiLander?style=social)](https://github.com/PRINCESTR/ModiLander)
 
 </div>
