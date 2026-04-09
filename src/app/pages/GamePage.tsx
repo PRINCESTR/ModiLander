@@ -415,6 +415,12 @@ export const GamePage: React.FC = () => {
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
       </div>
 
+      {/* Power Mode Peripheral Glow */}
+      {isPowerModeUIVisible && (
+        <div className="fixed inset-0 z-[5] pointer-events-none animate-[power-throb_2s_ease-in-out_infinite] rounded-[inherit]"
+          style={{ boxShadow: 'inset 0 0 60px rgba(229,0,255,0.2)' }} />
+      )}
+
       {/* Header Pill */}
       <div ref={headerRef} className="relative flex justify-center w-full px-4 pt-4 pb-2 z-[60]">
         <div className="flex items-center justify-between w-full max-w-[800px] rounded-full px-5 py-2 glass-pill shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
@@ -480,6 +486,24 @@ export const GamePage: React.FC = () => {
         </div>
       </div>
 
+      {/* Relocated Power Mode Banner (Premium Floating Pill) */}
+      {isPowerModeUIVisible && (
+        <div className="flex justify-center w-full px-4 mb-4 z-[60] animate-[fade-in-up_0.5s_ease-out]">
+          <div className="relative flex items-center gap-4 rounded-full px-8 py-2.5 glass shadow-[0_12px_40px_rgba(0,0,0,0.6)] border-white/10 overflow-hidden">
+            {/* Animated background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-magenta-500/20 to-purple-600/20 animate-[shimmer_3s_linear_infinite]" />
+            
+            <div className="relative z-10 flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ff00ff] shadow-[0_0_12px_#ff00ff] animate-pulse" />
+              <span className="font-black tracking-[5px] text-[12px] uppercase text-white drop-shadow-[0_2px_10px_rgba(255,0,255,0.5)]">
+                {characterId === 'modi' ? 'MODI' : 'RAHUL'} POWER MODE ON!
+              </span>
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ff00ff] shadow-[0_0_12px_#ff00ff] animate-pulse" />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Maze Container */}
       <div ref={containerRef} className="flex-1 relative flex items-center justify-center w-full min-h-0 px-2 py-2 overflow-hidden">
         <div
@@ -500,23 +524,14 @@ export const GamePage: React.FC = () => {
                   style={{ background: charAccent + '25', border: `2px solid ${charAccent}60` }}>
                   <img src={playerImg} alt="" className="w-12 h-12 rounded-full object-cover" />
                 </div>
-                <span className="font-black tracking-[6px] animate-[fade-in_0.5s_ease-out]"
-                  style={{ fontSize: 36, color: charAccent, textShadow: `0 0 30px ${charAccentGlow}` }}>
+                <span className="font-black tracking-[10px] animate-[fade-in_0.8s_ease-out] text-[42px] leading-tight"
+                  style={{ color: '#ffffff', textShadow: `0 0 40px ${charAccentGlow}, 0 4px 12px rgba(0,0,0,0.5)` }}>
                   GET READY!
                 </span>
                 <span className="text-[10px] tracking-[4px] font-bold uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>
                   {characterId === 'modi' ? 'Wah Modiji Wah!' : 'Maja Aaya!'}
                 </span>
               </div>
-            </div>
-          )}
-          {/* POWER MODE banner */}
-          {isPowerModeUIVisible && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 rounded-full px-5 py-2 animate-[fade-in_0.5s_ease-out]"
-              style={{ background: 'rgba(229,0,255,0.18)', border: '1px solid rgba(229,0,255,0.5)', backdropFilter: 'blur(12px)', boxShadow: '0 0 20px rgba(229,0,255,0.4)' }}>
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-accent font-black tracking-[5px] text-sm">{characterId === 'modi' ? 'MODI' : 'RAHUL'} POWER MODE ON!</span>
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             </div>
           )}
           <div
@@ -569,14 +584,14 @@ export const GamePage: React.FC = () => {
                   {/* Player */}
                   {playerUI.x === x && playerUI.y === y && (
                     <div className="absolute z-30 w-[60px] h-[60px]" style={{ left: 0, top: 0 }}>
-                      <div className="absolute inset-0 rounded-full blur-lg animate-pulse"
-                        style={{ background: charAccentGlow, opacity: 0.5 }} />
+                      <div className="absolute inset-0 rounded-full blur-xl animate-pulse"
+                        style={{ background: isPowerModeUIVisible ? '#ff00ff' : charAccentGlow, opacity: isPowerModeUIVisible ? 0.7 : 0.4 }} />
                       <img src={playerImg} alt="player"
-                        className="relative w-full h-full rounded-full object-cover scale-[1.08]"
+                        className="relative w-full h-full rounded-full object-cover scale-[1.08] transition-transform duration-300"
                         style={{
-                          border: `2px solid ${charAccent}`,
-                          boxShadow: `0 0 20px ${charAccentGlow}, 0 0 40px ${charAccent}40`,
-                          filter: 'brightness(1.1)',
+                          border: `2px solid ${isPowerModeUIVisible ? '#ff00ff' : charAccent}`,
+                          boxShadow: isPowerModeUIVisible ? '0 0 30px #ff00ff, 0 0 60px rgba(255,0,255,0.4)' : `0 0 20px ${charAccentGlow}, 0 0 40px ${charAccent}40`,
+                          filter: 'brightness(1.15)',
                         }} />
                     </div>
                   )}
