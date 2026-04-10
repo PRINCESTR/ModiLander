@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { ShareSheet } from "../components/ShareSheet";
 import { IconVolume, IconMute, IconShare, IconInstagram, IconGitHub } from "../components/Icons";
+import { ReviewForm } from "../components/ReviewForm";
 
 
 // ── All character images ──────────────────────────────────────────────────────
@@ -482,6 +483,9 @@ export const StartPage: React.FC = () => {
               Pure satire &amp; entertainment &middot; Not affiliated with any political party
             </p>
           </div>
+
+          {/* ── Review Form ── */}
+          <ReviewForm accentColor={sel.accent} />
         </div>
       </main>
 
