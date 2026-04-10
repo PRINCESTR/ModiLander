@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { ShareSheet } from "../components/ShareSheet";
-import { IconVolume, IconMute, IconShare, IconInstagram, IconGitHub } from "../components/Icons";
+import { IconVolume, IconMute, IconShare, IconInstagram, IconGitHub, IconLinkedIn } from "../components/Icons";
 import { ReviewForm } from "../components/ReviewForm";
 
 
@@ -76,8 +76,21 @@ const CHARACTERS = [
 ];
 
 const CREATORS = [
-  { name: "PRINCE", ig: "https://www.instagram.com/zwischenweg/",    gh: "https://github.com/PRINCESTR", handle: "@zwischenweg",    color: "#8b5cf6" },
-  { name: "SMIT",   ig: "https://www.instagram.com/sutariya_smit_/", gh: "https://github.com/PRINCESTR", handle: "@sutariya_smit_",  color: "#00e5ff" },
+  { 
+    name: "PRINCE", 
+    ig: "https://www.instagram.com/zwischenweg/",    
+    gh: "https://github.com/PRINCESTR", 
+    li: "https://www.linkedin.com/in/princesuthar",
+    handle: "@zwischenweg",    
+    color: "#8b5cf6" 
+  },
+  { 
+    name: "SMIT",   
+    ig: "https://www.instagram.com/sutariya_smit_/", 
+    gh: "https://github.com/PRINCESTR", 
+    handle: "@sutariya_smit_",  
+    color: "#00e5ff" 
+  },
 ];
 
 // ── Ticker ────────────────────────────────────────────────────────────────────
@@ -485,6 +498,13 @@ export const StartPage: React.FC = () => {
                       title="GitHub">
                       <IconGitHub size={13} color="rgba(255,255,255,0.7)" />
                     </a>
+                    {c.li && (
+                      <a href={c.li} target="_blank" rel="noopener noreferrer"
+                        className="w-7 h-7 rounded-full flex items-center justify-center transition-all bg-white/5 hover:bg-white/10"
+                        title="LinkedIn">
+                        <IconLinkedIn size={11} color="rgba(255,255,255,0.7)" />
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
