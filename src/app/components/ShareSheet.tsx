@@ -13,7 +13,7 @@ interface ShareSheetProps {
 export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score, screenshotUrl }) => {
   if (!isOpen) return null;
 
-  const shareText = `I scored ${score || 0} points in MODI_LANDER! 🏆 Can you beat me? Play here: https://modiman-xi.vercel.app/ — Built by PRINCE & SMIT`;
+  const shareText = `I scored ${score || 0} points in MODI_LANDER! 🏆 Can you beat me? Play here: https://modilander.vercel.app/ — Built by PRINCE & SMIT`;
   const encodedText = encodeURIComponent(shareText);
 
   const shareLinks = {
@@ -23,7 +23,7 @@ export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score, 
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText("https://modiman-xi.vercel.app/");
+    navigator.clipboard.writeText("https://modilander.vercel.app/");
     alert("Link copied to clipboard!");
   };
 
@@ -31,7 +31,7 @@ export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score, 
     if (!screenshotUrl) return;
     const a = document.createElement("a");
     a.href = screenshotUrl;
-    a.download = "modiman_score.png";
+    a.download = "modilander_score.png";
     a.click();
   };
 

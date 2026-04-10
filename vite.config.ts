@@ -18,9 +18,9 @@ export default defineConfig({
         enabled: true, // Allows testing PWA in localhost
       },
       manifest: {
-        name: 'Modiman',
-        short_name: 'Modiman',
-        description: 'The Ultimate Arcade Maze Game - Just for Fun!',
+        name: 'ModiLander',
+        short_name: 'ModiLander',
+        description: 'The Ultimate Satirical Arcade Maze Game - Just for Fun!',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',

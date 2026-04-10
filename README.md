@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./public/favicon.png" alt="Modiman Logo" width="120" height="120" style="border-radius: 20px;" />
+<img src="./public/favicon.png" alt="ModiLander Logo" width="120" height="120" style="border-radius: 20px;" />
 
 # 🏛️ MODI_LANDER
 
@@ -44,7 +44,7 @@ Created by **Prince** & **Smit**.
 ```bash
 # Clone the repo
 git clone https://github.com/PRINCESTR/ModiLander.git
-cd modiman-main
+cd ModiLander
 
 # Install dependencies
 npm install

@@ -129,7 +129,17 @@ export const StartPage: React.FC = () => {
   const [leaving, setLeaving] = useState(false);
   const [heroImgIdx, setHeroImgIdx] = useState(0);
   const [bestScore] = useState(() => {
-    try { return parseInt(localStorage.getItem("modiman_highScore") || "0"); } catch { return 0; }
+    try { 
+      const oldScore = localStorage.getItem("modiman_highScore");
+      const newScore = localStorage.getItem("modilander_highScore");
+      
+      if (oldScore && !newScore) {
+        localStorage.setItem("modilander_highScore", oldScore);
+        // Optional: localStorage.removeItem("modiman_highScore"); // Keep for safety for now
+        return parseInt(oldScore);
+      }
+      return parseInt(newScore || "0");
+    } catch { return 0; }
   });
   const navigate = useNavigate();
   const sel = CHARACTERS.find(c => c.id === selId)!;

@@ -86,7 +86,7 @@ export const WinLossPage: React.FC = () => {
       const url = URL.createObjectURL(blob);
       setScreenshotUrl(url);
       const file = new File([blob], "modilander_score.png", { type: "image/png" });
-      const shareText = `I scored ${score} in MODI_LANDER! 🏆 Can you beat me?\nPlay: https://modiman-xi.vercel.app/ — Built by PRINCE & SMIT`;
+      const shareText = `I scored ${score} in MODI_LANDER! 🏆 Can you beat me?\nPlay: https://modilander.vercel.app/ — Built by PRINCE & SMIT`;
       if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
         try { await navigator.share({ files: [file], title: "MODI_LANDER Score", text: shareText }); setIsSharing(false); return; }
         catch (err) { if ((err as Error).name === "AbortError") { setIsSharing(false); return; } }

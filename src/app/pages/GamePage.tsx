@@ -67,7 +67,7 @@ export const GamePage: React.FC = () => {
   const [isPowerModeUIVisible, setPowerModeUIVisible] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [highScore, setHighScore] = useState(() => parseInt(localStorage.getItem('modiman_highScore') || '0'));
+  const [highScore, setHighScore] = useState(() => parseInt(localStorage.getItem('modilander_highScore') || '0'));
   const [scale, setScale] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const dpadRef = useRef<HTMLDivElement>(null);
@@ -333,7 +333,7 @@ export const GamePage: React.FC = () => {
   }, [navigate, characterId, moveEntity, playEffect]);
 
   useEffect(() => {
-    if (score > highScore) { setHighScore(score); localStorage.setItem('modiman_highScore', score.toString()); }
+    if (score > highScore) { setHighScore(score); localStorage.setItem('modilander_highScore', score.toString()); }
   }, [score, highScore]);
 
   useEffect(() => {
