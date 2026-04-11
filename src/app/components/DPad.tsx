@@ -12,16 +12,16 @@ export const DPad: React.FC<DPadProps> = ({ className, onDirection }) => {
     <div className={clsx("grid grid-cols-3 grid-rows-3 gap-2", className)}>
       <div className="col-start-2">
         <button 
-          onClick={() => onDirection?.('UP')}
-          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+          onPointerDown={(e) => { e.preventDefault(); onDirection?.('UP'); }}
+          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)] touch-manipulation">
           <LuArrowUp size={32} />
         </button>
       </div>
       
       <div className="col-start-1 row-start-2">
         <button 
-          onClick={() => onDirection?.('LEFT')}
-          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+          onPointerDown={(e) => { e.preventDefault(); onDirection?.('LEFT'); }}
+          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)] touch-manipulation">
           <LuArrowLeft size={32} />
         </button>
       </div>
@@ -33,16 +33,16 @@ export const DPad: React.FC<DPadProps> = ({ className, onDirection }) => {
 
       <div className="col-start-3 row-start-2">
         <button 
-          onClick={() => onDirection?.('RIGHT')}
-          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+          onPointerDown={(e) => { e.preventDefault(); onDirection?.('RIGHT'); }}
+          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)] touch-manipulation">
           <LuArrowRight size={32} />
         </button>
       </div>
 
       <div className="col-start-2 row-start-3">
         <button 
-          onClick={() => onDirection?.('DOWN')}
-          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)]">
+          onPointerDown={(e) => { e.preventDefault(); onDirection?.('DOWN'); }}
+          className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/20 text-white/50 shadow-[0_4px_15px_rgba(0,0,0,0.3)] backdrop-blur-md transition-all active:scale-95 active:border-primary active:text-primary active:shadow-[0_0_20px_rgba(0,229,255,0.4)] touch-manipulation">
           <LuArrowDown size={32} />
         </button>
       </div>
