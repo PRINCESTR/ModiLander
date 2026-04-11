@@ -178,10 +178,16 @@ export const GamePage: React.FC = () => {
   }, [requestFullscreen]);
 
   useEffect(() => {
+     // Prevent scrolling on the body while the game is active
+     document.body.style.overflow = 'hidden';
+     
      (window as any).isReadyPhase = true;
      setReadyTextVisible(true);
      let t = setTimeout(() => { (window as any).isReadyPhase = false; setReadyTextVisible(false); }, 2000);
-     return () => clearTimeout(t);
+     return () => {
+       document.body.style.overflow = '';
+       clearTimeout(t);
+     };
   }, []);
 
   useEffect(() => {
@@ -406,7 +412,7 @@ export const GamePage: React.FC = () => {
       onTouchStart={handleTouchStart} 
       onTouchMove={handleTouchMove} 
       onTouchEnd={handleTouchEnd} 
-      className="fixed inset-0 h-[100dvh] flex flex-col bg-background text-foreground font-sans overflow-hidden select-none"
+      className="fixed inset-0 h-[100dvh] w-full flex flex-col bg-[#04040f] text-foreground font-sans overflow-hidden select-none z-[100]"
     >
       {/* Ambient background glow */}
       <div className="pointer-events-none fixed inset-0 z-0">
