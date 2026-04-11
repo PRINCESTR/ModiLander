@@ -14,6 +14,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
+      workbox: {
+        navigateFallbackDenylist: [/^\/sitemap\.xml$/, /^\/robots\.txt$/, /^\/google.*\.html$/]
+      },
       devOptions: {
         enabled: true, // Allows testing PWA in localhost
       },
