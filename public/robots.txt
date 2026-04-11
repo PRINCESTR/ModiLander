@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://modilander.vercel.app/sitemap.xml
