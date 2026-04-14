@@ -139,7 +139,7 @@ const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ labe
 // ── Main component ────────────────────────────────────────────────────────────
 export const StartPage: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
-  const bgMusicRef = useRef<HTMLAudioElement>(null);
+  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [selId, setSelId] = useState(CHARACTERS[0].id);
   const [difficulty, setDifficulty] = useState<DifficultyId>("easy");
