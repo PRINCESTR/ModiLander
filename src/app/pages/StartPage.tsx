@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { ShareSheet } from "../components/ShareSheet";
 import { IconVolume, IconMute, IconShare, IconInstagram, IconGitHub, IconLinkedIn } from "../components/Icons";
@@ -137,6 +137,7 @@ const StatBar: React.FC<{ label: string; val: number; color: string }> = ({ labe
 // ── Main component ────────────────────────────────────────────────────────────
 export const StartPage: React.FC = () => {
   const [isMuted, setIsMuted] = useState(false);
+  const bgMusicRef = useRef<HTMLAudioElement>(null);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [selId, setSelId] = useState(CHARACTERS[0].id);
   const [difficulty, setDifficulty] = useState<DifficultyId>("easy");
@@ -166,6 +167,35 @@ export const StartPage: React.FC = () => {
     return () => clearInterval(t);
   }, [selId, sel.images.length]);
 
+  // Handle Background Music
+  useEffect(() => {
+    const audio = bgMusicRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.3;
+    audio.loop = true;
+
+    const handleInteraction = () => {
+      if (!isMuted) audio.play().catch(() => {});
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+
+    if (isMuted) {
+      audio.pause();
+    } else {
+      audio.play().catch(() => {
+        window.addEventListener("click", handleInteraction);
+        window.addEventListener("touchstart", handleInteraction);
+      });
+    }
+
+    return () => {
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+  }, [isMuted]);
+
   const beep = useCallback((freq = 440, type: OscillatorType = "sine", vol = 0.07, dur = 0.09) => {
     if (isMuted) return;
     try {
@@ -181,6 +211,10 @@ export const StartPage: React.FC = () => {
   const handleStart = () => {
     beep(900, "square", 0.07, 0.12);
     setLeaving(true);
+    if (bgMusicRef.current) {
+      bgMusicRef.current.pause();
+      bgMusicRef.current.currentTime = 0;
+    }
     const prev = (window as any).activeAudio as HTMLAudioElement | undefined;
     if (prev) { prev.pause(); prev.currentTime = 0; }
     (window as any).activeAudio = null;
@@ -215,6 +249,8 @@ export const StartPage: React.FC = () => {
         transform: leaving ? "scale(0.98)" : "scale(1)",
         transition: "opacity 0.35s ease, transform 0.35s ease",
       }}>
+
+      <audio ref={bgMusicRef} src="/music.mp3" preload="auto" />
 
       {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -440,7 +476,7 @@ export const StartPage: React.FC = () => {
               padding: "18px 24px",
               background: `linear-gradient(135deg, ${sel.accent}E6, ${sel.accentLight}B3)`,
               backdropFilter: "blur(20px)",
-              border: `1px solid pl-white/20`,
+              border: `1px solid rgba(255,255,255,0.2)`,
             }}>
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative flex flex-col items-center gap-1.5">
