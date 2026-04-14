@@ -169,10 +169,13 @@ export const StartPage: React.FC = () => {
 
   // Handle Background Music
   useEffect(() => {
+    // Create audio instance if it doesn't exist
+    if (!bgMusicRef.current) {
+      bgMusicRef.current = new Audio("/music.mp3");
+    }
+    
     const audio = bgMusicRef.current;
-    if (!audio) return;
-
-    audio.volume = 0.05; // Lowered further to 5% volume
+    audio.volume = 0.05;
     audio.loop = true;
 
     const handleInteraction = () => {
@@ -193,6 +196,7 @@ export const StartPage: React.FC = () => {
     return () => {
       window.removeEventListener("click", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
+      audio.pause();
     };
   }, [isMuted]);
 
@@ -249,8 +253,6 @@ export const StartPage: React.FC = () => {
         transform: leaving ? "scale(0.98)" : "scale(1)",
         transition: "opacity 0.35s ease, transform 0.35s ease",
       }}>
-
-      <audio ref={bgMusicRef} src="/music.mp3" preload="auto" />
 
       {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
