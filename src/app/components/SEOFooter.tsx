@@ -44,10 +44,13 @@ export const SEOFooter: React.FC = () => {
            </a>
         </div>
 
-        <div className="text-center text-xs text-white/30 pt-8 mt-4 border-t border-white/5">
-           &copy; {new Date().getFullYear()} ModiLander Arcade Game. Engineered and Designed by Prince & Smit.<br />
-           A political satire maze game created purely for amusement. No actual politicians were harmed in the making of this software.
-        </div>
+      <div className="text-center text-xs text-white/30 pt-8 mt-4 border-t border-white/5">
+  &copy; {new Date().getFullYear()} ModiLander Arcade Game. Engineered and Designed by Prince & Smit.<br />
+  
+  Inspired by @code.itzpa1 (PAWAN ▪︎ DEV)<br />
+  
+  A political satire maze game created purely for amusement. No actual politicians were harmed in the making of this software.
+</div>
       </div>
     </footer>
   );
