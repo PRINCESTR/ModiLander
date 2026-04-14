@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { ShareSheet } from "../components/ShareSheet";
 import { IconVolume, IconMute, IconShare, IconInstagram, IconGitHub, IconLinkedIn } from "../components/Icons";
 import { ReviewForm } from "../components/ReviewForm";
+import { ReviewFeed } from "../components/ReviewFeed";
 import { SEOFooter } from "../components/SEOFooter";
 
 
@@ -553,7 +554,8 @@ export const StartPage: React.FC = () => {
             </p>
           </div>
 
-          {/* ── Review Form ── */}
+          {/* ── Review Feed & Form ── */}
+          <ReviewFeed />
           <ReviewForm accentColor={sel.accent} />
           </div>
         </main>
