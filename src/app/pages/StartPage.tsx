@@ -172,7 +172,7 @@ export const StartPage: React.FC = () => {
     const audio = bgMusicRef.current;
     if (!audio) return;
 
-    audio.volume = 0.3;
+    audio.volume = 0.05; // Lowered further to 5% volume
     audio.loop = true;
 
     const handleInteraction = () => {
