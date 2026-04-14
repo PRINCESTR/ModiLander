@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { ShareSheet } from "../components/ShareSheet";
 import { IconVolume, IconMute, IconShare, IconInstagram, IconGitHub, IconLinkedIn } from "../components/Icons";
 import { ReviewForm } from "../components/ReviewForm";
-import { ReviewFeed } from "../components/ReviewFeed";
 import { SEOFooter } from "../components/SEOFooter";
 
 
@@ -32,9 +31,9 @@ const HEADLINES = [
 
 // ── Difficulty config ─────────────────────────────────────────────────────────
 export const DIFFICULTY_LEVELS = [
-  { id: "easy",   label: "Easy",   subtitle: "Slow Ghosts",   speed: 240, color: "#22c55e", ghosts: 2 },
-  { id: "medium", label: "Medium", subtitle: "Classic Pace",  speed: 160, color: "#f97316", ghosts: 3 },
-  { id: "hard",   label: "Hard",   subtitle: "Full Send",     speed: 100, color: "#ef4444", ghosts: 4 },
+  { id: "easy", label: "Easy", subtitle: "Slow Ghosts", speed: 240, color: "#22c55e", ghosts: 2 },
+  { id: "medium", label: "Medium", subtitle: "Classic Pace", speed: 160, color: "#f97316", ghosts: 3 },
+  { id: "hard", label: "Hard", subtitle: "Full Send", speed: 100, color: "#ef4444", ghosts: 4 },
 ] as const;
 
 export type DifficultyId = typeof DIFFICULTY_LEVELS[number]["id"];
@@ -52,9 +51,9 @@ const CHARACTERS = [
     accent: "#f59e0b", accentLight: "#fbbf24", /* Premium warm amber/gold */
     border: "rgba(245,158,11,0.2)", shadow: "rgba(245,158,11,0.15)", bg: "rgba(245,158,11,0.08)",
     stats: [
-      { l: "Promise Speed",   v: 99 },
-      { l: "Dot Collection",  v: 95 },
-      { l: "Ghost Evasion",   v: 78 },
+      { l: "Promise Speed", v: 99 },
+      { l: "Dot Collection", v: 95 },
+      { l: "Ghost Evasion", v: 78 },
     ],
     quote: "Ek baar commit kar liya, toh phir khud ki bhi nahi sunta.",
   },
@@ -69,29 +68,29 @@ const CHARACTERS = [
     accent: "#0ea5e9", accentLight: "#38bdf8", /* Premium cool sky blue */
     border: "rgba(14,165,233,0.2)", shadow: "rgba(14,165,233,0.15)", bg: "rgba(14,165,233,0.08)",
     stats: [
-      { l: "Yatra Distance",  v: 88 },
-      { l: "Mic Drops",       v: 72 },
-      { l: "Chaos Theory",    v: 91 },
+      { l: "Yatra Distance", v: 88 },
+      { l: "Mic Drops", v: 72 },
+      { l: "Chaos Theory", v: 91 },
     ],
     quote: "Poverty is just a state of mind… unlike this maze, which is very real.",
   },
 ];
 
 const CREATORS = [
-  { 
-    name: "PRINCE", 
-    ig: "https://www.instagram.com/zwischenweg/",    
-    gh: "https://github.com/PRINCESTR", 
+  {
+    name: "PRINCE",
+    ig: "https://www.instagram.com/zwischenweg/",
+    gh: "https://github.com/PRINCESTR",
     li: "https://www.linkedin.com/in/princesuthar",
-    handle: "@zwischenweg",    
-    color: "#8b5cf6" 
+    handle: "@zwischenweg",
+    color: "#8b5cf6"
   },
-  { 
-    name: "SMIT",   
-    ig: "https://www.instagram.com/sutariya_smit_/", 
-    gh: "https://github.com/PRINCESTR", 
-    handle: "@sutariya_smit_",  
-    color: "#00e5ff" 
+  {
+    name: "SMIT",
+    ig: "https://www.instagram.com/sutariya_smit_/",
+    gh: "https://github.com/PRINCESTR",
+    handle: "@sutariya_smit_",
+    color: "#00e5ff"
   },
 ];
 
@@ -114,8 +113,10 @@ const Ticker: React.FC<{ accent: string }> = ({ accent: _accent }) => {
         <span className="text-[7px] font-black tracking-[3px] text-red-400 uppercase">Live</span>
       </div>
       <p className="text-[9px] tracking-wide flex-1 truncate transition-opacity duration-300 font-medium"
-        style={{ opacity: show ? 1 : 0, color: "rgba(255,255,255,0.3)",
-          transition: "opacity 0.3s ease" }}>
+        style={{
+          opacity: show ? 1 : 0, color: "rgba(255,255,255,0.3)",
+          transition: "opacity 0.3s ease"
+        }}>
         {HEADLINES[idx]}
       </p>
     </div>
@@ -145,10 +146,10 @@ export const StartPage: React.FC = () => {
   const [leaving, setLeaving] = useState(false);
   const [heroImgIdx, setHeroImgIdx] = useState(0);
   const [bestScore] = useState(() => {
-    try { 
+    try {
       const oldScore = localStorage.getItem("modiman_highScore");
       const newScore = localStorage.getItem("modilander_highScore");
-      
+
       if (oldScore && !newScore) {
         localStorage.setItem("modilander_highScore", oldScore);
         // Optional: localStorage.removeItem("modiman_highScore"); // Keep for safety for now
@@ -174,13 +175,13 @@ export const StartPage: React.FC = () => {
     if (!bgMusicRef.current) {
       bgMusicRef.current = new Audio("/music.mp3");
     }
-    
+
     const audio = bgMusicRef.current;
     audio.volume = 0.05;
     audio.loop = true;
 
     const handleInteraction = () => {
-      if (!isMuted) audio.play().catch(() => {});
+      if (!isMuted) audio.play().catch(() => { });
       window.removeEventListener("click", handleInteraction);
       window.removeEventListener("touchstart", handleInteraction);
     };
@@ -210,7 +211,7 @@ export const StartPage: React.FC = () => {
       gain.gain.setValueAtTime(vol, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
       osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime + dur);
-    } catch (_) {}
+    } catch (_) { }
   }, [isMuted]);
 
   const handleStart = () => {
@@ -234,7 +235,7 @@ export const StartPage: React.FC = () => {
     if (prev) { prev.pause(); prev.currentTime = 0; }
     if (!isMuted) {
       const audio = new Audio(CHARACTERS.find(c => c.id === id)?.audio);
-      audio.play().catch(() => {});
+      audio.play().catch(() => { });
       (window as any).activeAudio = audio;
     }
   };
@@ -258,11 +259,15 @@ export const StartPage: React.FC = () => {
       {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute rounded-full blur-[140px] transition-all duration-1000"
-          style={{ top: "-25%", right: "-15%", width: "70%", height: "70%",
-            background: `radial-gradient(circle, ${sel.accent}22 0%, transparent 70%)` }} />
+          style={{
+            top: "-25%", right: "-15%", width: "70%", height: "70%",
+            background: `radial-gradient(circle, ${sel.accent}22 0%, transparent 70%)`
+          }} />
         <div className="absolute rounded-full blur-[120px] transition-all duration-1000"
-          style={{ bottom: "-25%", left: "-15%", width: "60%", height: "60%",
-            background: `radial-gradient(circle, ${sel.accent}15 0%, transparent 70%)` }} />
+          style={{
+            bottom: "-25%", left: "-15%", width: "60%", height: "60%",
+            background: `radial-gradient(circle, ${sel.accent}15 0%, transparent 70%)`
+          }} />
         <div className="absolute inset-0"
           style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
         {/* Decorative aesthetic lines */}
@@ -475,7 +480,7 @@ export const StartPage: React.FC = () => {
           {/* ── Start button ── */}
           <button onClick={handleStart}
             className="relative w-full overflow-hidden rounded-2xl group transition-all duration-300 active:scale-[0.98] shadow-lg hover:shadow-2xl"
-            style={{ 
+            style={{
               padding: "18px 24px",
               background: `linear-gradient(135deg, ${sel.accent}E6, ${sel.accentLight}B3)`,
               backdropFilter: "blur(20px)",
@@ -498,9 +503,9 @@ export const StartPage: React.FC = () => {
 
           <div className="flex rounded-2xl overflow-hidden glass">
             {[
-              { label: "Best Score",    value: bestScore.toString().padStart(6, "0"), color: sel.accent },
-              { label: "Promises Kept", value: "😭",  color: "#ef4444" },
-              { label: "Terms Left",    value: "∞",   color: "rgba(255,255,255,0.4)" },
+              { label: "Best Score", value: bestScore.toString().padStart(6, "0"), color: sel.accent },
+              { label: "Promises Kept", value: "😭", color: "#ef4444" },
+              { label: "Terms Left", value: "∞", color: "rgba(255,255,255,0.4)" },
             ].map((item, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-1 py-4"
                 style={{ borderRight: i < 2 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
@@ -554,14 +559,13 @@ export const StartPage: React.FC = () => {
             </p>
           </div>
 
-          {/* ── Review Feed & Form ── */}
-          <ReviewFeed />
+          {/* ── Review Form ── */}
           <ReviewForm accentColor={sel.accent} />
-          </div>
-        </main>
+        </div>
+      </main>
 
-        <SEOFooter />
-        <ShareSheet isOpen={isShareOpen} onClose={() => setIsShareOpen(false)} />
-      </div>
+      <SEOFooter />
+      <ShareSheet isOpen={isShareOpen} onClose={() => setIsShareOpen(false)} />
+    </div>
   );
 };
