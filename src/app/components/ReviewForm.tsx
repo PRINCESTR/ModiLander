@@ -8,75 +8,111 @@ interface ReviewFormProps {
 export const ReviewForm: React.FC<ReviewFormProps> = ({ accentColor = "#f97316" }) => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
-  const handleSend = (phone: string) => {
-    if (!message.trim()) {
-      alert("Please enter a review message!");
+  const handleSend = () => {
+    if (!name.trim()) {
+      alert("Please enter your name!");
       return;
     }
-    const text = encodeURIComponent(`Hi! I'm ${name || "a Player"}. Here is my review for MODI_LANDER: ${message}`);
-    window.open(`https://wa.me/91${phone}?text=${text}`, "_blank");
+    if (rating === 0) {
+      alert("Please select a star rating!");
+      return;
+    }
+
+    const subject = encodeURIComponent(`MODI_LANDER Review from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nRating: ${rating}/5 Stars\nReview: ${message || "No message provided."}`);
+    
+    window.location.href = `mailto:vkpk90100@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
-    <div className="flex flex-col gap-5 w-full max-w-[500px] mx-auto p-6 rounded-[24px] glass-panel mt-8 mb-4">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/5 border border-white/10 shadow-inner">
-          <IconStar size={20} color={accentColor} />
+    <div className="flex flex-col gap-6 w-full max-w-[500px] mx-auto p-8 rounded-[32px] glass-panel mt-12 mb-6 border border-white/5">
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 shadow-inner group">
+          <IconStar size={24} color={rating > 0 ? "#fbbf24" : accentColor} className="transition-colors duration-300" />
         </div>
         <div className="flex flex-col">
-          <h3 className="text-lg font-black tracking-tight text-white/90">Send Review</h3>
-          <span className="text-[9px] uppercase tracking-[3px] text-white/40">Your feedback matters</span>
+          <h3 className="text-xl font-black tracking-tight text-white/90">Rate the Game</h3>
+          <span className="text-[10px] uppercase tracking-[4px] text-white/30 font-medium">Help us improve the maze</span>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1.5">
-          <label className="text-[9px] uppercase tracking-widest text-white/40 ml-1">Your Name</label>
+      <div className="flex flex-col gap-5">
+        {/* Star Rating Section */}
+        <div className="flex flex-col gap-2 px-1">
+          <label className="text-[10px] uppercase tracking-[3px] text-white/40 font-bold">
+            Rating <span className="text-red-500/60 ml-1 text-xs">*</span>
+          </label>
+          <div className="flex gap-2.5">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                onMouseEnter={() => setHoverRating(star)}
+                onMouseLeave={() => setHoverRating(0)}
+                onClick={() => setRating(star)}
+                className="transition-all duration-300 transform hover:scale-125 active:scale-90"
+                aria-label={`Rate ${star} stars`}
+              >
+                <IconStar 
+                  size={28} 
+                  color={(hoverRating || rating) >= star ? "#fbbf24" : "rgba(255,255,255,0.08)"} 
+                  className={`transition-all duration-300 ${rating >= star ? 'drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]' : ''}`}
+                />
+              </button>
+            ))}
+            {rating > 0 && (
+              <span className="ml-2 text-[10px] font-black text-white/20 uppercase self-center tracking-widest animate-pulse">
+                {rating}/5
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-[10px] uppercase tracking-[3px] text-white/40 font-bold ml-1">
+            Your Name <span className="text-red-500/60 ml-1 text-xs">*</span>
+          </label>
           <input
             type="text"
-            placeholder="Enter your name..."
+            placeholder="e.g. Rahul G."
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white/20 transition-all placeholder:text-white/10"
+            className="w-full bg-black/40 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white focus:outline-none focus:border-white/30 focus:bg-black/60 transition-all placeholder:text-white/10 shadow-inner"
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label className="text-[9px] uppercase tracking-widest text-white/40 ml-1">Your Review</label>
+        <div className="flex flex-col gap-2">
+          <label className="text-[10px] uppercase tracking-[3px] text-white/40 font-bold ml-1">Message</label>
           <textarea
-            placeholder="Tell us what you think about the game..."
+            placeholder="Tell us what you liked or what's broken..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={3}
-            className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-white/20 transition-all placeholder:text-white/10 resize-none"
+            className="w-full bg-black/40 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white focus:outline-none focus:border-white/30 focus:bg-black/60 transition-all placeholder:text-white/10 resize-none shadow-inner"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 mt-2">
-        <button
-          onClick={() => handleSend("9033640100")}
-          className="group relative overflow-hidden rounded-xl py-3 px-4 flex items-center justify-center gap-2 transition-all active:scale-[0.98] bg-white/5 border border-white/10 hover:bg-white/10"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-          <span className="text-[10px] font-bold tracking-widest uppercase text-white/80">Prince</span>
-          <IconPlay size={10} color="white" className="opacity-40 group-hover:translate-x-0.5 transition-transform" />
-        </button>
+      <button
+        onClick={handleSend}
+        className="group relative overflow-hidden rounded-2xl py-4 flex items-center justify-center gap-3 transition-all active:scale-[0.98] shadow-lg mt-2"
+        style={{ 
+          background: rating > 0 && name.trim() ? `linear-gradient(135deg, ${accentColor}, ${accentColor}cc)` : "rgba(255,255,255,0.05)",
+          border: `1px solid ${rating > 0 && name.trim() ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.05)"}`
+        }}
+      >
+        <span className={`text-xs font-black tracking-[6px] uppercase transition-colors duration-300 ${rating > 0 && name.trim() ? "text-white" : "text-white/20"}`}>
+          Submit Review
+        </span>
+        <IconPlay size={12} color={rating > 0 && name.trim() ? "white" : "rgba(255,255,255,0.2)"} className="group-hover:translate-x-1 transition-transform" />
+      </button>
 
-        <button
-          onClick={() => handleSend("9016590044")}
-          className="group relative overflow-hidden rounded-xl py-3 px-4 flex items-center justify-center gap-2 transition-all active:scale-[0.98] bg-white/5 border border-white/10 hover:bg-white/10"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          <span className="text-[10px] font-bold tracking-widest uppercase text-white/80">Smit</span>
-          <IconPlay size={10} color="white" className="opacity-40 group-hover:translate-x-0.5 transition-transform" />
-        </button>
-      </div>
-
-      <p className="text-center text-[7px] text-white/20 uppercase tracking-widest mt-1">
-        Redirection will open WhatsApp &bull; Secure Submission
+      <p className="text-center text-[8px] text-white/20 uppercase tracking-[4px] mt-2 font-medium">
+        Secure Submission &bull; Opens your email client
       </p>
     </div>
   );
 };
+
