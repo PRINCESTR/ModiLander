@@ -374,8 +374,8 @@ export const GamePage: React.FC = () => {
   // Character-specific theming for the game board
   const charAccent = characterId === 'modi' ? '#f59e0b' : '#0ea5e9';
   const charAccentGlow = characterId === 'modi' ? 'rgba(245,158,11,0.6)' : 'rgba(14,165,233,0.6)';
-  const charWallColor = characterId === 'modi' ? 'rgba(245,158,11,0.04)' : 'rgba(14,165,233,0.04)';
-  const charWallBorder = characterId === 'modi' ? 'rgba(245,158,11,0.1)' : 'rgba(14,165,233,0.12)';
+  const charWallColor = characterId === 'modi' ? 'rgba(245,158,11,0.2)' : 'rgba(14,165,233,0.25)';
+  const charWallBorder = characterId === 'modi' ? 'rgba(245,158,11,0.5)' : 'rgba(14,165,233,0.6)';
   const charDotColor = characterId === 'modi' ? 'rgba(251,191,36,0.9)' : 'rgba(56,189,248,0.9)';
   const charDotGlow = characterId === 'modi' ? 'rgba(245,158,11,0.3)' : 'rgba(14,165,233,0.3)';
 
@@ -565,7 +565,7 @@ export const GamePage: React.FC = () => {
                       style={{
                         background: charWallColor,
                         border: `1px solid ${charWallBorder}`,
-                        boxShadow: `inset 0 0 12px rgba(0,0,0,0.3), 0 0 6px ${charAccent}08`,
+                        boxShadow: `inset 0 0 12px rgba(0,0,0,0.4), 0 0 10px ${charAccent}30`,
                       }} />
                   )}
 
