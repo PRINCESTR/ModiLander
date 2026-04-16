@@ -29,7 +29,7 @@ export const ContactPage: React.FC = () => {
           <div className="mt-8 flex flex-col gap-4">
             <h3 className="font-bold text-white/80 uppercase tracking-widest text-xs">Direct Email</h3>
             <a 
-              href="mailto:contact@modilander.com" 
+              href="mailto:vkpk90100@gmail.com" 
               className="inline-flex items-center gap-3 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors rounded-xl px-6 py-4 w-fit group"
             >
               <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -37,7 +37,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-xs text-white/40 uppercase tracking-wider font-bold">Email us at</span>
-                <span className="text-white font-medium text-base">contact@modilander.com</span>
+                <span className="text-white font-medium text-base">vkpk90100@gmail.com</span>
               </div>
             </a>
           </div>
