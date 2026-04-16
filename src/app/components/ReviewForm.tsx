@@ -11,14 +11,22 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ accentColor = "#f97316" 
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 
-  const handleSend = (phone: string) => {
+  const handleSend = () => {
     if (rating === 0) {
       alert("Please select a star rating first!");
       return;
     }
     const starText = "⭐".repeat(rating);
-    const text = encodeURIComponent(`Hi! I'm ${name || "a Player"}. Rating: ${rating}/5 ${starText}. Review: ${message}`);
-    window.open(`https://wa.me/91${phone}?text=${text}`, "_blank");
+    const text = encodeURIComponent(`Hi! Here's my vote: ${rating}/5 ${starText}. Review: ${message}`);
+    
+    const phones = ["9033640100", "9016590044"];
+    
+    // Attempt to open both (browsers may ask for permission for the second popup)
+    phones.forEach((phone, index) => {
+      setTimeout(() => {
+        window.open(`https://wa.me/91${phone}?text=${text}`, "_blank");
+      }, index * 500); // 500ms delay between opens to help avoid popup blockers
+    });
   };
 
   return (
@@ -28,7 +36,7 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ accentColor = "#f97316" 
           <IconStar size={20} color={rating > 0 ? "#fbbf24" : accentColor} />
         </div>
         <div className="flex flex-col">
-          <h3 className="text-lg font-black tracking-tight text-white/90">Send Review</h3>
+          <h3 className="text-lg font-black tracking-tight text-white/90">Submit Your Vote</h3>
           <span className="text-[9px] uppercase tracking-[3px] text-white/40">Your feedback matters</span>
         </div>
       </div>
@@ -79,23 +87,17 @@ export const ReviewForm: React.FC<ReviewFormProps> = ({ accentColor = "#f97316" 
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 mt-2">
+      <div className="mt-2">
         <button
-          onClick={() => handleSend("9033640100")}
-          className="group relative overflow-hidden rounded-xl py-3 px-4 flex items-center justify-center gap-2 transition-all active:scale-[0.98] bg-white/5 border border-white/10 hover:bg-white/10"
+          onClick={handleSend}
+          className="w-full group relative overflow-hidden rounded-xl py-4 px-4 flex items-center justify-center gap-3 transition-all active:scale-[0.98] bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20"
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-          <span className="text-[10px] font-bold tracking-widest uppercase text-white/80">Prince</span>
-          <IconPlay size={10} color="white" className="opacity-40 group-hover:translate-x-0.5 transition-transform" />
-        </button>
-
-        <button
-          onClick={() => handleSend("9016590044")}
-          className="group relative overflow-hidden rounded-xl py-3 px-4 flex items-center justify-center gap-2 transition-all active:scale-[0.98] bg-white/5 border border-white/10 hover:bg-white/10"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          <span className="text-[10px] font-bold tracking-widest uppercase text-white/80">Smit</span>
-          <IconPlay size={10} color="white" className="opacity-40 group-hover:translate-x-0.5 transition-transform" />
+          <div className="flex -space-x-2">
+            <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse ring-2 ring-black/20" />
+            <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse delay-75 ring-2 ring-black/20" />
+          </div>
+          <span className="text-[11px] font-black tracking-[4px] uppercase text-white">Submit Your Vote</span>
+          <IconPlay size={10} color="white" className="opacity-40 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
 
