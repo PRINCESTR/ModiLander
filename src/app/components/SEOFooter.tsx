@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 export const SEOFooter: React.FC = () => {
   return (
@@ -44,13 +45,18 @@ export const SEOFooter: React.FC = () => {
            </a>
         </div>
 
-      <div className="text-center text-xs text-white/30 pt-8 mt-4 border-t border-white/5">
-  &copy; {new Date().getFullYear()} ModiLander Arcade Game. Engineered and Designed by Prince & Smit.<br />
-  
-  Inspired by @code.itzpa1 (PAWAN ▪︎ DEV)<br />
-  
-  A political satire maze game created purely for amusement. No actual politicians were harmed in the making of this software.
-</div>
+        <div className="text-center text-xs text-white/30 pt-8 mt-4 border-t border-white/5 flex flex-col gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 font-semibold uppercase tracking-widest text-[#f97316]">
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/about" className="hover:text-white transition-colors">About</Link>
+            <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
+          </div>
+          <div>
+            &copy; {new Date().getFullYear()} ModiLander Arcade Game. Engineered and Designed by Prince & Smit.<br />
+            Inspired by @code.itzpa1 (PAWAN ▪︎ DEV)<br />
+            A political satire maze game created purely for amusement. No actual politicians were harmed in the making of this software.
+          </div>
+        </div>
       </div>
     </footer>
   );
