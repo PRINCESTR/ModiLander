@@ -54,6 +54,7 @@ export const SEOFooter: React.FC = () => {
           <div>
             &copy; {new Date().getFullYear()} ModiLander Arcade Game. Engineered and Designed by Prince & Smit.<br />
             Inspired by @code.itzpa1 (PAWAN ▪︎ DEV)<br />
+            This game created by <a href="https://www.instagram.com/z___w___p/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-2">ZwP</a><br />
             A political satire maze game created purely for amusement. No actual politicians were harmed in the making of this software.
           </div>
         </div>
