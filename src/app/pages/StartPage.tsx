@@ -82,7 +82,7 @@ const CHARACTERS = [
   },
   {
     id: "kejrival",
-    name: "KEJRIVAL",
+    name: "KEJU",
     title: "The Aam Aadmi Maze Runner",
     tagline: "Aap ka dost!",
     images: [kej1, kej2, kej3],

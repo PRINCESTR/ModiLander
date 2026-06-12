@@ -13,7 +13,7 @@ import modiLoseVideo from "./../../assets/win/modi_lose.mp4";
 import rahulLoseVideo from "./../../assets/win/rahul_lose.mp4";
 import winmodiPhoto from "./../../assets/win/winmodi.png";
 import winrahulPhoto from "./../../assets/win/winrahul.png";
-import kejwin from "./../../assets/win/kejriwalwin.mp4";
+import kejwin from "./../../assets/win/Kejriwalwin.mp4";
 import kejlose from "./../../assets/win/kejriwal_lose.mp4";
 import winkejriwal from "./../../assets/win/winkejriwal.jpg";
 
