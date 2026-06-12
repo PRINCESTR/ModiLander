@@ -14,9 +14,13 @@ import modi7 from "./../../assets/characters/modi/7.png";
 import rahul1 from "./../../assets/characters/rahul/1.png";
 import rahul2 from "./../../assets/characters/rahul/2.png";
 import rahul3 from "./../../assets/characters/rahul/3.png";
+import kej1 from "./../../assets/characters/kejrival/9.png";
+import kej2 from "./../../assets/characters/kejrival/10.png";
+import kej3 from "./../../assets/characters/kejrival/11.png";
 import Logo from "./../../assets/favicon.png";
 import modiMusic from "./../../assets/audio/wah-modiji-wah.mp3";
 import rahulMusic from "./../../assets/audio/maja-aaya.mp3";
+import kejMusic from "./../../assets/audio/kejrival.mp3";
 import { WiDaySnowThunderstorm } from "react-icons/wi";
 
 // ── Live ticker headlines ─────────────────────────────────────────────────────
@@ -76,6 +80,23 @@ const CHARACTERS = [
     ],
     quote: "Poverty is just a state of mind… unlike this maze, which is very real.",
   },
+  {
+    id: "kejrival",
+    name: "KEJRIVAL",
+    title: "The Aam Aadmi Maze Runner",
+    tagline: "Aap ka dost!",
+    images: [kej1, kej2, kej3],
+    heroImage: kej1,
+    audio: kejMusic,
+    accent: "#34d399", accentLight: "#86efac",
+    border: "rgba(52,211,153,0.2)", shadow: "rgba(52,211,153,0.15)", bg: "rgba(52,211,153,0.08)",
+    stats: [
+      { l: "Street Cred", v: 86 },
+      { l: "Dot Diplomacy", v: 80 },
+      { l: "Populism", v: 92 },
+    ],
+    quote: "Promises with a side of policy.",
+  },
 ];
 
 const CREATORS = [
@@ -88,12 +109,19 @@ const CREATORS = [
     color: "#8b5cf6"
   },
   {
+    name: 'DARSHAN',
+    ig: "https://www.instagram.com/z__w__p_official/",
+    gh: "https://github.com/darshan3187",
+    handle: "@darshan_rajgor",
+    color: "#d93c39"
+  },
+  {
     name: "SMIT",
     ig: "https://www.instagram.com/sutariya_smit_/",
     gh: "https://github.com/PRINCESTR",
     handle: "@sutariya_smit_",
     color: "#00e5ff"
-  },
+  }
 ];
 
 // ── Ticker ────────────────────────────────────────────────────────────────────

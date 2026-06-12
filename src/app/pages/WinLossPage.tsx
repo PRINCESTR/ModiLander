@@ -13,6 +13,9 @@ import modiLoseVideo from "./../../assets/win/modi_lose.mp4";
 import rahulLoseVideo from "./../../assets/win/rahul_lose.mp4";
 import winmodiPhoto from "./../../assets/win/winmodi.png";
 import winrahulPhoto from "./../../assets/win/winrahul.png";
+import kejwin from "./../../assets/win/kejriwalwin.mp4";
+import kejlose from "./../../assets/win/kejriwal_lose.mp4";
+import winkejriwal from "./../../assets/win/winkejriwal.jpg";
 
 // Satirical result messages
 const WIN_MESSAGES = [
@@ -39,20 +42,20 @@ export const WinLossPage: React.FC = () => {
   const { status, character, score } = location.state || { status: "loss", character: "modi", score: 0 };
   const isWin = status === "win";
 
-  const winnerName = isWin
-    ? (character === "modi" ? "MODI JI" : "RAHUL G")
-    : (character === "modi" ? "RAHUL G" : "MODI JI");
-  const loserName = isWin
-    ? (character === "modi" ? "RAHUL G" : "MODI JI")
-    : (character === "modi" ? "MODI JI" : "RAHUL G");
+  const NAME_MAP: Record<string, string> = { modi: "MODI JI", rahul: "RAHUL G", kejrival: "KEJRIVAL" };
+  const ENEMY_NAME_MAP: Record<string, string> = { modi: "RAHUL G", rahul: "MODI JI", kejrival: "MODI JI" };
 
-  // Video: each character has their own win and lose video
-  const videoSrc = character === "modi"
-    ? (isWin ? modiVideo : modiLoseVideo)
-    : (isWin ? rahulVideo : rahulLoseVideo);
-  // Photo: always show the winner
-  const showModi = (character === "modi" && isWin) || (character === "rahul" && !isWin);
-  const photoSrc = showModi ? winmodiPhoto : winrahulPhoto;
+  const VIDEO_MAP: Record<string, { win: string; lose: string; photo: string; name: string }> = {
+    modi: { win: modiVideo, lose: modiLoseVideo, photo: winmodiPhoto, name: NAME_MAP.modi },
+    rahul: { win: rahulVideo, lose: rahulLoseVideo, photo: winrahulPhoto, name: NAME_MAP.rahul },
+    kejrival: { win: kejwin, lose: kejlose, photo: winkejriwal, name: NAME_MAP.kejrival },
+  };
+
+  const entry = VIDEO_MAP[character] ?? VIDEO_MAP['modi'];
+  const videoSrc = isWin ? entry.win : entry.lose;
+  const photoSrc = entry.photo;
+  const winnerName = isWin ? (NAME_MAP[character] ?? NAME_MAP.modi) : (ENEMY_NAME_MAP[character] ?? NAME_MAP.modi);
+  const loserName = isWin ? (ENEMY_NAME_MAP[character] ?? NAME_MAP.modi) : (NAME_MAP[character] ?? NAME_MAP.modi);
 
   // Pick a random satirical message
   const sarcasticMsg = isWin

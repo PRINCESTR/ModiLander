@@ -12,6 +12,9 @@ import rahul1 from "./../../assets/characters/rahul/1.png";
 import rahul2 from "./../../assets/characters/rahul/2.png";
 import rahul3 from "./../../assets/characters/rahul/3.png";
 import bonusImg from "./../../assets/characters/8.png";
+import kej1 from "./../../assets/characters/kejrival/9.png";
+import kej2 from "./../../assets/characters/kejrival/10.png";
+import kej3 from "./../../assets/characters/kejrival/11.png";
 
 // Audio assets
 import bgMusic from "./../../assets/audio/bg_music.mp3";
@@ -19,6 +22,7 @@ import wahModi from "./../../assets/audio/wah-modiji-wah.mp3";
 import majaAaya from "./../../assets/audio/maja-aaya.mp3";
 import laureNa from "./../../assets/audio/laure-na-bhujjam-x-modi.mp3";
 import khatam from "./../../assets/audio/khatam.mp3";
+import kejSound from "./../../assets/audio/kejrival.mp3";
 
 // MAZE TEMPLATE — never mutated, freshMaze() always returns a deep copy
 const MAZE_TEMPLATE = [
@@ -144,8 +148,16 @@ export const GamePage: React.FC = () => {
 
   useEffect(() => { isMutedRef.current = isMuted; }, [isMuted]);
 
-  const playerImg = characterId === 'modi' ? modi5 : rahul3;
-  const enemyImgs = characterId === 'modi' ? [rahul1, rahul2, rahul3] : [modi5, modi6, modi7];
+  // Character asset map — makes adding new characters simple
+  const CHARACTER_ASSETS: Record<string, { player: string; enemies: string[]; pelletSfx?: string; deathSfx?: string; lifeEmoji?: string; accent?: string; accentGlow?: string; wallColor?: string; wallBorder?: string; dotColor?: string; dotGlow?: string; tagline?: string; powerLabel?: string }> = {
+    modi: { player: modi5, enemies: [rahul1, rahul2, rahul3], pelletSfx: wahModi, deathSfx: khatam, lifeEmoji: '🪷', accent: '#f59e0b', accentGlow: 'rgba(245,158,11,0.6)', wallColor: 'rgba(245,158,11,0.2)', wallBorder: 'rgba(245,158,11,0.5)', dotColor: 'rgba(251,191,36,0.9)', dotGlow: 'rgba(245,158,11,0.3)', tagline: 'Wah Modiji Wah!', powerLabel: 'MODI' },
+    rahul: { player: rahul3, enemies: [modi5, modi6, modi7], pelletSfx: majaAaya, deathSfx: laureNa, lifeEmoji: '✋', accent: '#0ea5e9', accentGlow: 'rgba(14,165,233,0.6)', wallColor: 'rgba(14,165,233,0.25)', wallBorder: 'rgba(14,165,233,0.6)', dotColor: 'rgba(56,189,248,0.9)', dotGlow: 'rgba(14,165,233,0.3)', tagline: 'Maja Aaya!', powerLabel: 'RAHUL' },
+    kejrival: { player: kej1, enemies: [modi5, modi6, modi7], pelletSfx: kejSound, deathSfx: khatam, lifeEmoji: '🗳️', accent: '#34d399', accentGlow: 'rgba(52,211,153,0.6)', wallColor: 'rgba(52,211,153,0.08)', wallBorder: 'rgba(52,211,153,0.2)', dotColor: 'rgba(52,211,153,0.9)', dotGlow: 'rgba(52,211,153,0.3)', tagline: 'Aap ka dost!', powerLabel: 'KEJRIVAL' },
+  };
+
+  const assets = CHARACTER_ASSETS[characterId] ?? CHARACTER_ASSETS['modi'];
+  const playerImg = assets.player;
+  const enemyImgs = assets.enemies;
 
   const playEffect = useCallback((src: string) => {
     if (!isMutedRef.current) {
@@ -215,7 +227,7 @@ export const GamePage: React.FC = () => {
       const cell = mazeRef.current[p.y][p.x];
       if (cell === 0 || cell === 3) {
         if (cell === 3) {
-            playEffect(characterId === 'modi' ? wahModi : majaAaya);
+          if (assets.pelletSfx) playEffect(assets.pelletSfx);
             (window as any).isPowerMode = true;
             (window as any).isPowerModeTimer = powerTicks;
             setPowerModeUIVisible(true);
@@ -315,7 +327,7 @@ export const GamePage: React.FC = () => {
              setScore(scoreRef.current);
              colHero.x = 6; colHero.y = 5;
         } else {
-            playEffect(characterId === 'modi' ? khatam : laureNa);
+            if (assets.deathSfx) playEffect(assets.deathSfx);
             if (livesRef.current > 1) {
               livesRef.current--; setLives(livesRef.current);
               p.x = 6; p.y = 10; p.currentDir = null; p.nextDir = null;
@@ -372,12 +384,12 @@ export const GamePage: React.FC = () => {
   }, [isMuted]);
 
   // Character-specific theming for the game board
-  const charAccent = characterId === 'modi' ? '#f59e0b' : '#0ea5e9';
-  const charAccentGlow = characterId === 'modi' ? 'rgba(245,158,11,0.6)' : 'rgba(14,165,233,0.6)';
-  const charWallColor = characterId === 'modi' ? 'rgba(245,158,11,0.2)' : 'rgba(14,165,233,0.25)';
-  const charWallBorder = characterId === 'modi' ? 'rgba(245,158,11,0.5)' : 'rgba(14,165,233,0.6)';
-  const charDotColor = characterId === 'modi' ? 'rgba(251,191,36,0.9)' : 'rgba(56,189,248,0.9)';
-  const charDotGlow = characterId === 'modi' ? 'rgba(245,158,11,0.3)' : 'rgba(14,165,233,0.3)';
+  const charAccent = assets.accent ?? '#f59e0b';
+  const charAccentGlow = assets.accentGlow ?? 'rgba(245,158,11,0.6)';
+  const charWallColor = assets.wallColor ?? 'rgba(245,158,11,0.2)';
+  const charWallBorder = assets.wallBorder ?? 'rgba(245,158,11,0.5)';
+  const charDotColor = assets.dotColor ?? 'rgba(251,191,36,0.9)';
+  const charDotGlow = assets.dotGlow ?? 'rgba(245,158,11,0.3)';
 
   const touchStartRef = useRef<{ x: number, y: number } | null>(null);
 
@@ -476,7 +488,7 @@ export const GamePage: React.FC = () => {
                 <span key={i}
                   className="text-[16px] leading-none transition-all duration-300 drop-shadow-md"
                   style={{ opacity: i < lives ? 1 : 0.2, filter: i < lives ? 'none' : 'grayscale(1)', transform: i < lives ? 'scale(1)' : 'scale(0.8)' }}>
-                  {characterId === 'modi' ? '🪷' : '✋'}
+                  {assets.lifeEmoji ?? '❓'}
                 </span>
               ))}
             </div>
@@ -501,8 +513,8 @@ export const GamePage: React.FC = () => {
             
             <div className="relative z-10 flex items-center gap-3">
               <div className="w-2.5 h-2.5 rounded-full bg-[#ff00ff] shadow-[0_0_12px_#ff00ff] animate-pulse" />
-              <span className="font-black tracking-[5px] text-[12px] uppercase text-white drop-shadow-[0_2px_10px_rgba(255,0,255,0.5)]">
-                {characterId === 'modi' ? 'MODI' : 'RAHUL'} POWER MODE ON!
+                <span className="font-black tracking-[5px] text-[12px] uppercase text-white drop-shadow-[0_2px_10px_rgba(255,0,255,0.5)]">
+                {assets.powerLabel ?? characterId.toUpperCase()} POWER MODE ON!
               </span>
               <div className="w-2.5 h-2.5 rounded-full bg-[#ff00ff] shadow-[0_0_12px_#ff00ff] animate-pulse" />
             </div>
@@ -535,7 +547,7 @@ export const GamePage: React.FC = () => {
                   GET READY!
                 </span>
                 <span className="text-[10px] tracking-[4px] font-bold uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>
-                  {characterId === 'modi' ? 'Wah Modiji Wah!' : 'Maja Aaya!'}
+                  {assets.tagline ?? (characterId === 'modi' ? 'Wah Modiji Wah!' : 'Maja Aaya!')}
                 </span>
               </div>
             </div>
