@@ -15,6 +15,9 @@ import bonusImg from "./../../assets/characters/8.png";
 import kej1 from "./../../assets/characters/kejrival/9.png";
 import kej2 from "./../../assets/characters/kejrival/10.png";
 import kej3 from "./../../assets/characters/kejrival/11.png";
+import mamta1 from "./../../assets/characters/Didi/12.png";
+import mamta2 from "./../../assets/characters/Didi/13.png";
+import mamta3 from "./../../assets/characters/Didi/14.png";
 
 // Audio assets
 import bgMusic from "./../../assets/audio/bg_music.mp3";
@@ -23,6 +26,7 @@ import majaAaya from "./../../assets/audio/maja-aaya.mp3";
 import laureNa from "./../../assets/audio/laure-na-bhujjam-x-modi.mp3";
 import khatam from "./../../assets/audio/khatam.mp3";
 import kejSound from "./../../assets/audio/kejrival.mp3";
+import mamtaMusic from "./../../assets/audio/mamta_didi.mp3";
 
 // MAZE TEMPLATE — never mutated, freshMaze() always returns a deep copy
 const MAZE_TEMPLATE = [
@@ -153,6 +157,7 @@ export const GamePage: React.FC = () => {
     modi: { player: modi5, enemies: [rahul1, rahul2, rahul3], pelletSfx: wahModi, deathSfx: khatam, lifeEmoji: '🪷', accent: '#f59e0b', accentGlow: 'rgba(245,158,11,0.6)', wallColor: 'rgba(245,158,11,0.2)', wallBorder: 'rgba(245,158,11,0.5)', dotColor: 'rgba(251,191,36,0.9)', dotGlow: 'rgba(245,158,11,0.3)', tagline: 'Wah Modiji Wah!', powerLabel: 'MODI' },
     rahul: { player: rahul3, enemies: [modi5, modi6, modi7], pelletSfx: majaAaya, deathSfx: laureNa, lifeEmoji: '✋', accent: '#0ea5e9', accentGlow: 'rgba(14,165,233,0.6)', wallColor: 'rgba(14,165,233,0.25)', wallBorder: 'rgba(14,165,233,0.6)', dotColor: 'rgba(56,189,248,0.9)', dotGlow: 'rgba(14,165,233,0.3)', tagline: 'Maja Aaya!', powerLabel: 'RAHUL' },
     kejrival: { player: kej1, enemies: [modi5, modi6, modi7], pelletSfx: kejSound, deathSfx: khatam, lifeEmoji: '🗳️', accent: '#34d399', accentGlow: 'rgba(52,211,153,0.6)', wallColor: 'rgba(52,211,153,0.08)', wallBorder: 'rgba(52,211,153,0.2)', dotColor: 'rgba(52,211,153,0.9)', dotGlow: 'rgba(52,211,153,0.3)', tagline: 'Aap ka dost!', powerLabel: 'KEJRIVAL' },
+    mamta: { player: mamta1, enemies: [modi5, modi6, modi7], pelletSfx: mamtaMusic, deathSfx: khatam, lifeEmoji: '🌸', accent: '#8b5cf6', accentGlow: 'rgba(139,92,246,0.6)', wallColor: 'rgba(139,92,246,0.12)', wallBorder: 'rgba(139,92,246,0.35)', dotColor: 'rgba(196,181,253,0.92)', dotGlow: 'rgba(139,92,246,0.3)', tagline: 'Khela Hobe!', powerLabel: 'DIDI' },
   };
 
   const assets = CHARACTER_ASSETS[characterId] ?? CHARACTER_ASSETS['modi'];

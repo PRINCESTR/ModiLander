@@ -13,9 +13,12 @@ import modiLoseVideo from "./../../assets/win/modi_lose.mp4";
 import rahulLoseVideo from "./../../assets/win/rahul_lose.mp4";
 import winmodiPhoto from "./../../assets/win/winmodi.png";
 import winrahulPhoto from "./../../assets/win/winrahul.png";
-import kejwin from "./../../assets/win/Kejriwalwin.mp4";
+import kejwin from "./../../assets/win/kejriwalwin.mp4";
 import kejlose from "./../../assets/win/kejriwal_lose.mp4";
 import winkejriwal from "./../../assets/win/winkejriwal.jpg";
+import didiWinVideo from "./../../assets/win/didiwin.mp4";
+import didiLoseVideo from "./../../assets/win/didi_lose.mp4";
+import mamtaPhoto from "./../../assets/characters/Didi/12.png";
 
 // Satirical result messages
 const WIN_MESSAGES = [
@@ -42,13 +45,14 @@ export const WinLossPage: React.FC = () => {
   const { status, character, score } = location.state || { status: "loss", character: "modi", score: 0 };
   const isWin = status === "win";
 
-  const NAME_MAP: Record<string, string> = { modi: "MODI JI", rahul: "RAHUL G", kejrival: "KEJRIVAL" };
-  const ENEMY_NAME_MAP: Record<string, string> = { modi: "RAHUL G", rahul: "MODI JI", kejrival: "MODI JI" };
+  const NAME_MAP: Record<string, string> = { modi: "MODI JI", rahul: "RAHUL G", kejrival: "KEJRIVAL", mamta: "DIDI" };
+  const ENEMY_NAME_MAP: Record<string, string> = { modi: "RAHUL G", rahul: "MODI JI", kejrival: "MODI JI", mamta: "MODI JI" };
 
   const VIDEO_MAP: Record<string, { win: string; lose: string; photo: string; name: string }> = {
     modi: { win: modiVideo, lose: modiLoseVideo, photo: winmodiPhoto, name: NAME_MAP.modi },
     rahul: { win: rahulVideo, lose: rahulLoseVideo, photo: winrahulPhoto, name: NAME_MAP.rahul },
     kejrival: { win: kejwin, lose: kejlose, photo: winkejriwal, name: NAME_MAP.kejrival },
+    mamta: { win: didiWinVideo, lose: didiLoseVideo, photo: mamtaPhoto, name: NAME_MAP.mamta },
   };
 
   const entry = VIDEO_MAP[character] ?? VIDEO_MAP['modi'];

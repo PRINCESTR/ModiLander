@@ -17,10 +17,14 @@ import rahul3 from "./../../assets/characters/rahul/3.png";
 import kej1 from "./../../assets/characters/kejrival/9.png";
 import kej2 from "./../../assets/characters/kejrival/10.png";
 import kej3 from "./../../assets/characters/kejrival/11.png";
+import mamta1 from "./../../assets/characters/Didi/12.png";
+import mamta2 from "./../../assets/characters/Didi/13.png";
+import mamta3 from "./../../assets/characters/Didi/14.png";
 import Logo from "./../../assets/favicon.png";
 import modiMusic from "./../../assets/audio/wah-modiji-wah.mp3";
 import rahulMusic from "./../../assets/audio/maja-aaya.mp3";
 import kejMusic from "./../../assets/audio/kejrival.mp3";
+import mamtaMusic from "./../../assets/audio/mamta_didi.mp3";
 import { WiDaySnowThunderstorm } from "react-icons/wi";
 
 // ── Live ticker headlines ─────────────────────────────────────────────────────
@@ -97,6 +101,23 @@ const CHARACTERS = [
     ],
     quote: "Promises with a side of policy.",
   },
+  {
+    id: "mamta",
+    name: "DIDI",
+    title: "The Maze Matriarch",
+    tagline: "Khela Hobe!",
+    images: [mamta1, mamta2, mamta3],
+    heroImage: mamta1,
+    audio: mamtaMusic,
+    accent: "#8b5cf6", accentLight: "#a78bfa",
+    border: "rgba(139,92,246,0.2)", shadow: "rgba(139,92,246,0.15)", bg: "rgba(139,92,246,0.08)",
+    stats: [
+      { l: "Matriarchal Wisdom", v: 90 },
+      { l: "Dot Domination", v: 85 },
+      { l: "Chaos Management", v: 88 },
+    ],
+    quote: "Khela hobe, lekin saath mein hamesha doston ka saath.",
+  }
 ];
 
 const CREATORS = [
