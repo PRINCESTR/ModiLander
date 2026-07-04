@@ -124,7 +124,7 @@ const CREATORS = [
   {
     name: "PRINCE",
     ig: "https://www.instagram.com/zwischenweg/",
-    gh: "https://github.com/PRINCESTR",
+    gh: "https://github.com/ZWISCHENWEG",
     li: "https://www.linkedin.com/in/princesuthar",
     handle: "@zwischenweg",
     color: "#8b5cf6"
@@ -139,7 +139,7 @@ const CREATORS = [
   {
     name: "SMIT",
     ig: "https://www.instagram.com/sutariya_smit_/",
-    gh: "https://github.com/PRINCESTR",
+    gh: "https://github.com/ZWISCHENWEG",
     handle: "@sutariya_smit_",
     color: "#00e5ff"
   }
