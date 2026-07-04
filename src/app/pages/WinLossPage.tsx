@@ -355,7 +355,7 @@ export const WinLossPage: React.FC = () => {
     ctx.font = "bold 15px Arial, sans-serif";
     ctx.fillStyle = PRIMARY + "bb";
     ctx.letterSpacing = "1px";
-    ctx.fillText("github.com/PRINCESTR", W / 2, stripY + 72);
+    ctx.fillText("github.com/ZWISCHENWEG", W / 2, stripY + 72);
     ctx.font = "700 11px Arial, sans-serif";
     ctx.fillStyle = "rgba(255,255,255,0.18)";
     ctx.letterSpacing = "4px";
@@ -383,7 +383,7 @@ export const WinLossPage: React.FC = () => {
   const doShare = async () => {
     if (!storyBlob) return;
     const file = new File([storyBlob], "modilander_story.png", { type: "image/png" });
-    const shareText = `I scored ${score} in MODI_LANDER! Play: github.com/PRINCESTR — Made by @zwischenweg & @sutariya_smit_`;
+    const shareText = `I scored ${score} in MODI_LANDER! Play: github.com/ZWISCHENWEG — Made by @zwischenweg & @sutariya_smit_`;
 
     // 1. Try to copy image to clipboard so user can paste into Instagram
     let copiedToClipboard = false;
